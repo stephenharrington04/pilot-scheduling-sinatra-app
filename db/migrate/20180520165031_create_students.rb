@@ -4,5 +4,6 @@ class CreateStudents < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :course_type
       t.string :password_digest
+    end
   end
 end

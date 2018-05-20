@@ -4,5 +4,6 @@ class CreateFlights < ActiveRecord::Migration[5.2]
       t.string :mission_number
       t.decimal :duration
       t.string :mission_type
+    end
   end
 end
