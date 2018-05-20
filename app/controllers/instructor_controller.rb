@@ -1,8 +1,8 @@
 class InstructorController < ApplicationController
 
   get '/instructors' do
-
-    erb :'/index'
+    @instructors = Instructor.all
+    erb :'/instructors/index'
   end
 
   get '/instructors/signup' do
@@ -10,7 +10,7 @@ class InstructorController < ApplicationController
     erb :'/instructors/create_instructor'
   end
 
-  post '/instructors/signup' do
+  post '/instructors' do
 
     redirect "/instructors/:slug"
   end

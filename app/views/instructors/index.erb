@@ -1,0 +1,7 @@
+<h1>Welcome to the Instructors Directory</h1>
+
+<ol>
+  <% @instructors.all.each do |instructor| %>
+    <li> <a href="/instructors/:slug"><%= instructor.name %></a></li>
+  <% end %>
+</ol>
