@@ -14,12 +14,11 @@ class InstructorController < ApplicationController
   #hard coded the admin_password for now.  May change to be dynamic later.
 
   post '/instructors' do
-    redirect "/instructors/signup" if params.has_value?("")
     redirect "/instructors/signup" if params[:admin_password] != "instructor password"
+    redirect "/instructors/signup" if params.has_value?("")
     redirect "/instructors/signup" if Instructor.find_by(email: params[:instructor][:email])
-    @instructor = Instructor.create(params[:instructor])
-    session[:instructor_id] = @instructor.id
-    binding.pry
+    instructor = Instructor.create(params[:instructor])
+    session[:instructor_id] = instructor.id
     redirect "/instructors/:slug"
   end
 
@@ -29,12 +28,12 @@ class InstructorController < ApplicationController
   end
 
   post '/instructors/login' do
-    instructor = Instructor.find_by(email: params[:email], password_digest: params[:password])
+    instructor = Instructor.find_by(email: params[:email], password: params[:password])
     if instructor && instructor.authenticate(params[:password])
       session[:instructor_id] = instructor.id
       redirect "/instructors/:slug"
     end
-    redirect "/instructors/:slug"
+    redirect "/instructors/login"
   end
 
   get '/instructors/:slug' do
