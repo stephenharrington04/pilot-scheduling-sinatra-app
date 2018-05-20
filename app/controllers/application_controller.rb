@@ -11,5 +11,14 @@ class ApplicationController < Sinatra::Base
  get '/' do
    erb :'/index'
  end
- 
+
+ helpers do
+   def logged_in?
+    !!session[:instructor_id] || !!session[:student_id]
+   end
+
+   def go_log_in
+      redirect "/login" if !logged_in?
+   end
+  end
 end

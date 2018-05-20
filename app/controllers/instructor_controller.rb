@@ -6,12 +6,11 @@ class InstructorController < ApplicationController
   end
 
   get '/instructors/signup' do
-
+    redirect "/instructors/index" if logged_in?
     erb :'/instructors/create_instructor'
   end
 
   post '/instructors' do
-
     redirect "/instructors/:slug"
   end
 

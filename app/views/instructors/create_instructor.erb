@@ -1,1 +1,14 @@
-create an instructor here
+<h1>Sign Up Today!</h1>
+<h3>Instructors Only</h3>
+
+<form action="/instructors" method="POST">
+  <label>Name: </label>
+  <input type="text" name="instructor[name]" id="instructor name">
+  <label>Email: </label>
+  <input type="text" name="instructor[email]" id="instructor email">
+  <label>Password: </label>
+  <input type="password" name="instructor[password]" id="instructor password">
+  <label>Admin Password: </label>
+  <input type="password" name="admin_password" id="admin password">
+  <input type="submit" value="Create Account">
+</form>
