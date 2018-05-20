@@ -1,0 +1,6 @@
+class StudentController < ApplicationController
+
+
+
+
+end
