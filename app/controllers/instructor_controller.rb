@@ -1,6 +1,7 @@
 class InstructorController < ApplicationController
 
   get '/instructors' do
+    redirect "/" if !logged_in?
     @instructors = Instructor.all
     erb :'/instructors/index'
   end
@@ -9,6 +10,8 @@ class InstructorController < ApplicationController
     redirect "/instructors/index" if logged_in?
     erb :'/instructors/create_instructor'
   end
+
+  #hard coded the admin_password for now.  May change to be dynamic later.
 
   post '/instructors' do
     redirect "/instructors/signup" if params.has_value?("")
@@ -26,7 +29,11 @@ class InstructorController < ApplicationController
   end
 
   post '/instructors/login' do
-
+    instructor = Instructor.find_by(email: params[:email], password_digest: params[:password])
+    if instructor && instructor.authenticate(params[:password])
+      session[:instructor_id] = instructor.id
+      redirect "/instructors/:slug"
+    end
     redirect "/instructors/:slug"
   end
 
