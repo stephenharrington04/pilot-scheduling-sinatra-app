@@ -1,7 +1,7 @@
 require './config/environment'
 
-Use Rack::MethodOverride
+use Rack::MethodOverride
 
 
 
-Run ApplicationController
+run ApplicationController
