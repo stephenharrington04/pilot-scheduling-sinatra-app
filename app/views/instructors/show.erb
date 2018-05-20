@@ -1,1 +1,19 @@
-show page
+<h1>Welcome <%= @instructor.name %></h1>
+<h3>Here are your flights:</h3>
+<ol>
+  <% @instructor.flights.each do |flight| %>
+    <li><%= flight.mission_number %></li>
+    <li><%= flight.mission_type %></li>
+    <li><%= flight.duration %></li>
+  <% end %>
+</ol>
+<h3>Here are your students:</h3>
+<ol>
+  <% @instructor.students.each do |student| %>
+    <li><%= student.name %></li>
+    <li><%= student.course_type %></li>
+  <% end %>
+</ol>
+<form action="/instructors/:slug" method="POST">
+  
+</form>

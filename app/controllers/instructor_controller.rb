@@ -29,7 +29,6 @@ class InstructorController < ApplicationController
 
   post '/instructors/login' do
     instructor = Instructor.find_by(email: params[:email])
-    binding.pry
     if instructor && instructor.authenticate(params["password"])
       session[:instructor_id] = instructor.id
       redirect "/instructors/:slug"
@@ -38,10 +37,9 @@ class InstructorController < ApplicationController
   end
 
   get '/instructors/:slug' do
-
+    redirect "/" if !logged_in?
+    @instructor = Instructor.find_by_slug(params[:slug])
     erb :'/instructors/show'
   end
-
-
 
 end
