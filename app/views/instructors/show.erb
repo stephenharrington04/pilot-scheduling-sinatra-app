@@ -14,6 +14,14 @@
     <li><%= student.course_type %></li>
   <% end %>
 </ol>
-<form action="/instructors/:slug" method="POST">
-  
+<form action="/instructors/:slug/delete" method="POST">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Account">
+</form>
+<form action="/instructors/:slug/edit" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <input type="submit" value="Edit Account">
+</form>
+<form action="/logout" method="GET">
+  <input type="submit" value="Logout">
 </form>
