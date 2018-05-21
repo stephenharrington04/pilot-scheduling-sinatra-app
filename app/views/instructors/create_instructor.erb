@@ -2,9 +2,9 @@
 <h3>Instructors Only</h3>
 
 <% if flash.has?(:message) %>
-  <%= flash[:message] %>
+  <%= flash[:message] %><br>
 <% end %>
-<br>
+
 <form action="/instructors" method="POST">
   <label>Name: </label>
   <input type="text" name="instructor[name]" id="instructor name" required>

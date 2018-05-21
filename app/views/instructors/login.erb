@@ -1,9 +1,9 @@
 <h1>Instructors Log In Here</h1>
 
 <% if flash.has?(:message) %>
-  <%= flash[:message] %>
+  <%= flash[:message] %><br>
 <% end %>
-<br>
+
 <form action="/instructors/login" method="POST">
   <label>Email: </label>
   <input type="text" name="email" id="instructor_email"><br>

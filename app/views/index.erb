@@ -1,5 +1,9 @@
 <h1>Welcome to the Pilot Scheduling Web Application</h1>
 
+<% if flash.has?(:message) %>
+  <%= flash[:message] %><br>
+<% end %>
+
 <h3><a href="/instructors/signup">Instructors Sign Up Here</a></h3>
 <p>Already Have an Account?</p>
 <h3><a href="/instructors/login">Instructors Login Here</a></h3>

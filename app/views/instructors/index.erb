@@ -1,9 +1,9 @@
 <h1>Welcome to the Instructors Directory</h1>
 
 <% if flash.has?(:message) %>
-  <%= flash[:message] %>
+  <%= flash[:message] %><br>
 <% end %>
-<br>
+
 <ol>
   <% @instructors.all.each do |instructor| %>
     <li> <a href="/instructors/<%= instructor.slug %>"><%= instructor.name %></a></li>
