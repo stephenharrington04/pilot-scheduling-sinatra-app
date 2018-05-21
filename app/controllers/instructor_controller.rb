@@ -43,8 +43,10 @@ class InstructorController < ApplicationController
   end
 
   get '/instructors/:slug/edit' do
+    binding.pry
     redirect "/" if !logged_in?
     @instructor = Instructor.find_by_slug(params[:slug])
+    redirect "/instructors" if session[:instructor_id] != @instructor.id
     erb :'/instructors/edit'
   end
 
