@@ -10,6 +10,7 @@ class FlightController < ApplicationController
   end
 
   post '/flights' do
+    binding.pry
     if params[:flight][:duration].to_f <= 0
       flash[:message] = "You must enter a duration greater than 0.0"
       redirect "/flights/new"

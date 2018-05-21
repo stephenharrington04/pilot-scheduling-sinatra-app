@@ -4,9 +4,10 @@
   <ol>
     <li><a href="/flights/<%= flight.id %>"><%= flight.callsign %></a></li><br>
       <ul>
-        <li>Instructor: <%= flight.instructor.name %></li><br>
-        <li>Student: insert flight.student.name here </li><br>
-        <li>Mission Type: <%= flight.mission_type %></li><br>
+        <li>Date of Flight: <%= flight.flight_date %></li>
+        <li>Instructor: <%= flight.instructor.name %></li>
+        <li>Student: insert flight.student.name here </li>
+        <li>Mission Type: <%= flight.mission_type %></li>
         <li>Duration: <%= flight.duration %></li><br>
       </ul>
   </ol>

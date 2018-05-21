@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_21_203427) do
+ActiveRecord::Schema.define(version: 2018_05_21_233644) do
 
   create_table "flights", force: :cascade do |t|
     t.string "mission_number"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2018_05_21_203427) do
     t.integer "instructor_id"
     t.integer "student_id"
     t.string "callsign"
+    t.date "flight_date"
   end
 
   create_table "instructors", force: :cascade do |t|
