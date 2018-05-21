@@ -10,8 +10,16 @@
   <label>Mission Type: </label>
   <input type="text" name="flight[mission_type]" id="mission_type" required><br>
   <label>Instructor: </label>
-  <input type="text" name="flight[instructor_id]" id="instructor_id" required><br>
+  <% Instructor.all.each do |instructor| %>
+    <input type="checkbox" name="flight[instructor_id]" id="<%= instructor.name %>" value="<%= instructor.name %>" required>
+    <%= instructor.name %>
+    </input>
+  <% end %><br>
   <label>Student: </label>
-  <input type="text" name="flight[student_id]" id="student_id" required><br>
+  <% Student.all.each do |student| %>
+    <input type="checkbox" name="flight[student_id]" id="<%= student.name %>" value="<%= student.name %>" required>
+    <%= student.name %>
+    </input>
+  <% end %><br>
   <input type="submit" value="Create Flight">
 </form>
