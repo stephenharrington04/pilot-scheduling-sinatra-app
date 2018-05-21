@@ -8,8 +8,12 @@ class InstructorController < ApplicationController
   end
 
   get '/instructors/signup' do
-    redirect "/instructors" if instructor_logged_in?
-    erb :'/instructors/create_instructor'
+    if instructor_logged_in?
+      flash[:message] = "You're already Logged In."
+      redirect "/instructors"
+    else
+      erb :'/instructors/create_instructor'
+    end
   end
 
   #hard coded the admin_password for now.  May change to be dynamic later.
@@ -32,8 +36,12 @@ class InstructorController < ApplicationController
   end
 
   get '/instructors/login' do
-    redirect "/instructors" if instructor_logged_in?
-    erb :'/instructors/login'
+    if instructor_logged_in?
+      flash[:message] = "You're already Logged In."
+      redirect "/instructors"
+    else
+      erb :'/instructors/login'
+    end
   end
 
   post '/instructors/login' do
@@ -41,8 +49,10 @@ class InstructorController < ApplicationController
     if instructor && instructor.authenticate(params["password"])
       session[:instructor_id] = instructor.id
       redirect "/instructors/#{instructor.slug}"
+    else
+      flash[:message] = "Incorrect Email and/or Password."
+      redirect "/instructors/login"
     end
-    redirect "/instructors/login"
   end
 
   get '/instructors/:slug' do
@@ -54,8 +64,12 @@ class InstructorController < ApplicationController
   get '/instructors/:slug/edit' do
     instructor_go_log_in
     @instructor = Instructor.find_by_slug(params[:slug])
-    redirect "/instructors" if current_instructor != @instructor
-    erb :'/instructors/edit'
+    if current_instructor != @instructor
+      flash[:message] = "You do not have permissions to edit THAT page."
+      redirect "/instructors"
+    else
+      erb :'/instructors/edit'
+    end
   end
 
   patch '/instructors/:slug' do
