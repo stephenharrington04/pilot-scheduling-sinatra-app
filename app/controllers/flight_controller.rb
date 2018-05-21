@@ -15,8 +15,8 @@ class FlightController < ApplicationController
       redirect "/flights/new"
     end
     flight = Flight.create(params[:flight])
-    flight.instructor = Instructor.find_by(name: params["instructor name"])
-    flight.student = Student.find_by(name: params["student name"])
+    flight.instructor = Instructor.find_by(name: params[:ip_name])
+    flight.student = Student.find_by(name: params[:student_name])
     flight.save
     redirect "/flights/#{flight.id}"
   end

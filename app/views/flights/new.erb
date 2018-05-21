@@ -15,13 +15,13 @@
   <input type="text" name="flight[mission_type]" id="mission_type" required><br>
   <label>Instructor: </label>
   <% Instructor.all.each do |instructor| %>
-    <input type="checkbox" name="instructor name" id="<%= instructor.name %>" required>
+    <input type="checkbox" name="ip_name" id="<%= instructor.name %>" value="<%= instructor.name %>" required>
     <%= instructor.name %>
     </input>
   <% end %><br>
   <label>Student: </label>
   <% Student.all.each do |student| %>
-    <input type="checkbox" name="student name" id="<%= student.name %>" required>
+    <input type="checkbox" name="student_name" id="<%= student.name %>" value="<%= student.name %>" required>
     <%= student.name %>
     </input>
   <% end %><br>
