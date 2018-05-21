@@ -19,7 +19,7 @@ class InstructorController < ApplicationController
     redirect "/instructors/signup" if params[:admin_password] != "instructor password"
     instructor = Instructor.create(params[:instructor])
     session[:instructor_id] = instructor.id
-    redirect "/instructors/:slug"
+    redirect "/instructors/#{instructor.slug}"
   end
 
   get '/instructors/login' do
@@ -31,7 +31,7 @@ class InstructorController < ApplicationController
     instructor = Instructor.find_by(email: params[:email])
     if instructor && instructor.authenticate(params["password"])
       session[:instructor_id] = instructor.id
-      redirect "/instructors/:slug"
+      redirect "/instructors/#{instructor.slug}"
     end
     redirect "/instructors/login"
   end
@@ -40,6 +40,19 @@ class InstructorController < ApplicationController
     redirect "/" if !logged_in?
     @instructor = Instructor.find_by_slug(params[:slug])
     erb :'/instructors/show'
+  end
+
+  get '/instructors/:slug/edit' do
+
+  end
+
+  patch '/instructors/:slug' do
+
+  end
+
+  delete '/instructors/:slug/delete' do
+    redirect "/instructors" if current_instructor != Instructor.find_by_slug(params[:slug])
+    current_instructor.delete
   end
 
 end

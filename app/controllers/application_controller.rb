@@ -25,5 +25,9 @@ class ApplicationController < Sinatra::Base
    def go_log_in
       redirect "/login" if !logged_in?
    end
+
+   def current_instructor
+      Instructor.find(session[:instructor_id])
+   end
   end
 end
