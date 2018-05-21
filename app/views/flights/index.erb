@@ -1,7 +1,15 @@
 <h1>Flights</h1>
 
 <% @flights.each do |flight| %>
-  <a href="/flights/<%= flight.id %>"><%= flight.callsign %></a><br>
+  <ol>
+    <li><a href="/flights/<%= flight.id %>"><%= flight.callsign %></a></li><br>
+      <ul>
+        <li>Instructor: <%= flight.instructor %></li><br>
+        <li>Student: <%= flight.student %></li><br>
+        <li>Mission Type: <%= flight.mission_type %></li><br>
+        <li>Duration: <%= flight.duration %></li><br>
+      </ul>
+  </ol>
 <% end %>
 <br>
 <form action="/flights/new" method="GET">
