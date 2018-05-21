@@ -39,11 +39,15 @@ class InstructorController < ApplicationController
   get '/instructors/:slug' do
     redirect "/" if !logged_in?
     @instructor = Instructor.find_by_slug(params[:slug])
+    redirect "/instructors/index" if @instructor != current_instructor
     erb :'/instructors/show'
   end
 
   get '/instructors/:slug/edit' do
-
+    redirect "/" if !logged_in?
+    @instructor = Instructor.find_by_slug(params[:slug])
+    redirect "/instructors/index" if @instructor != current_instructor
+    erb :'/instructors/edit'
   end
 
   patch '/instructors/:slug' do
