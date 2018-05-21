@@ -11,9 +11,8 @@ class InstructorController < ApplicationController
     if instructor_logged_in?
       flash[:message] = "You're already Logged In."
       redirect "/instructors"
-    else
-      erb :'/instructors/new'
     end
+    erb :'/instructors/new'
   end
 
   #hard coded the admin_password for now.  May change to be dynamic later.
@@ -40,9 +39,8 @@ class InstructorController < ApplicationController
     if instructor_logged_in?
       flash[:message] = "You're already Logged In."
       redirect "/instructors"
-    else
-      erb :'/instructors/login'
     end
+    erb :'/instructors/login'
   end
 
   post '/instructors/login' do
@@ -51,10 +49,9 @@ class InstructorController < ApplicationController
       session[:instructor_id] = instructor.id
       flash[:message] = "Successfully Logged In!"
       redirect "/instructors/#{instructor.slug}"
-    else
-      flash[:message] = "Incorrect Email and/or Password."
-      redirect "/instructors/login"
     end
+    flash[:message] = "Incorrect Email and/or Password."
+    redirect "/instructors/login"
   end
 
   get '/instructors/:slug' do
@@ -69,23 +66,22 @@ class InstructorController < ApplicationController
     if current_instructor != @instructor
       flash[:message] = "You do not have permissions to edit THAT page."
       redirect "/instructors"
-    else
-      erb :'/instructors/edit'
     end
+    erb :'/instructors/edit'
   end
 
   patch '/instructors/:slug' do
     instructor = Instructor.find_by_slug(params[:slug])
-    redirect "/instructors" if current_instructor != instructor
     if params[:instructor][:password] != params[:password_confirm]
       flash[:message] = "New Password does not match Confirm Password.  Please Try Again."
       redirect "/instructors/#{instructor.slug}/edit"
-    elsif Instructor.find_by(email: params[:instructor][:email]) && Instructor.find_by(email: params[:instructor][:email]).email != instructor.email
+    elsif Instructor.find_by(email: params[:instructor][:email]) && params[:instructor][:email] != instructor.email
       flash[:message] = "An account associated with this email already exists.  Please try again."
       redirect "/instructors/#{instructor.slug}/edit"
     elsif instructor && current_instructor.authenticate(params[:current_password])
       instructor.update(params[:instructor])
       instructor.save
+      flash[:message] = "Account Successfully Updated!"
       redirect "/instructors/#{instructor.slug}"
     else
       flash[:message] = "Current Password was incorrect.  Please Try Again."
@@ -99,22 +95,19 @@ class InstructorController < ApplicationController
     if current_instructor != @instructor
       flash[:message] = "You do not have permissions to Delete that account."
       redirect "/instructors"
-    else
-      erb :'/instructors/delete'
     end
+    erb :'/instructors/delete'
   end
 
   delete '/instructors/:slug/delete' do
-    instructor = Instructor.find_by_slug(params[:slug])
-    if instructor && current_instructor.authenticate(params[:password])
+    if current_instructor.authenticate(params[:password])
       current_instructor.delete
       session.clear
       flash[:message] = "Successfully Deleted Account!"
       redirect "/"
-    else
-      flash[:message] = "Incorrect Password.  Please Try Again."
-      redirect "/instructors/#{instructor.slug}/delete"
     end
+    flash[:message] = "Incorrect Password.  Please Try Again."
+    redirect "/instructors/#{current_instructor.slug}/delete"
   end
 
 end
