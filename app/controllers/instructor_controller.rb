@@ -61,13 +61,20 @@ class InstructorController < ApplicationController
   patch '/instructors/:slug' do
     instructor = Instructor.find_by_slug(params[:slug])
     redirect "/instructors" if current_instructor != instructor
-    redirect "/instructors/#{instructor.slug}/edit" if params[:instructor][:password] != params[:password_confirm]
-    if instructor && current_instructor.authenticate(params[:current_password])
+    if params[:instructor][:password] != params[:password_confirm]
+      flash[:message] = "New Password does not match Confirm Password.  Please Try Again."
+      redirect "/instructors/#{instructor.slug}/edit"
+    elsif Instructor.find_by(email: params[:instructor][:email]) && Instructor.find_by(email: params[:instructor][:email]).email != instructor.email
+      flash[:message] = "An account associated with this email already exists.  Please try again."
+      redirect "/instructors/#{instructor.slug}/edit"
+    elsif instructor && current_instructor.authenticate(params[:current_password])
       instructor.update(params[:instructor])
       instructor.save
       redirect "/instructors/#{instructor.slug}"
+    else
+      flash[:message] = "Current Password was incorrect.  Please Try Again."
+      redirect "/instructors/#{instructor.slug}/edit"
     end
-    redirect "/instructors/#{instructor.slug}/edit"
   end
 
   delete '/instructors/:slug/delete' do
