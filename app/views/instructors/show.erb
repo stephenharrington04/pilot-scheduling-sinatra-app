@@ -1,4 +1,9 @@
 <h1>Welcome <%= @instructor.name %></h1>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %><br>
+<% end %>
+
 <h3>Here are your flights:</h3>
 <ol>
   <% @instructor.flights.each do |flight| %>

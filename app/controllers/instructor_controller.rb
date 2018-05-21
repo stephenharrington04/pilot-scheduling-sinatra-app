@@ -31,6 +31,7 @@ class InstructorController < ApplicationController
     else
       instructor = Instructor.create(params[:instructor])
       session[:instructor_id] = instructor.id
+      flash[:message] = "Successfully Created an Account!"
       redirect "/instructors/#{instructor.slug}"
     end
   end
@@ -48,6 +49,7 @@ class InstructorController < ApplicationController
     instructor = Instructor.find_by(email: params[:email])
     if instructor && instructor.authenticate(params["password"])
       session[:instructor_id] = instructor.id
+      flash[:message] = "Successfully Logged In!"
       redirect "/instructors/#{instructor.slug}"
     else
       flash[:message] = "Incorrect Email and/or Password."
@@ -107,6 +109,7 @@ class InstructorController < ApplicationController
     if instructor && current_instructor.authenticate(params[:password])
       current_instructor.delete
       session.clear
+      flash[:message] = "Successfully Deleted Account!"
       redirect "/"
     else
       flash[:message] = "Incorrect Password.  Please Try Again."
