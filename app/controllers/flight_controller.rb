@@ -10,7 +10,14 @@ class FlightController < ApplicationController
   end
 
   post '/flights' do
+    if params[:flight][:duration].to_f <= 0
+      flash[:message] = "You must enter a duration greater than 0.0"
+      redirect "/flights/new"
+    end
     flight = Flight.create(params[:flight])
+    flight.instructor = Instructor.find_by(name: params["instructor name"])
+    flight.student = Student.find_by(name: params["student name"])
+    flight.save
     redirect "/flights/#{flight.id}"
   end
 

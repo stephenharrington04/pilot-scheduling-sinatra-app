@@ -1,5 +1,9 @@
 <h1>Create A Flight!</h1>
 
+<% if flash.has?(:message) %>
+  <%= flash[:message] %><br>
+<% end %>
+
 <form action="/flights" method="POST">
   <label>Callsign: </label>
   <input type="text" name="flight[callsign]" id="callsign" required><br>
@@ -11,13 +15,13 @@
   <input type="text" name="flight[mission_type]" id="mission_type" required><br>
   <label>Instructor: </label>
   <% Instructor.all.each do |instructor| %>
-    <input type="checkbox" name="flight[instructor_id]" id="<%= instructor.name %>" value="<%= instructor.name %>" required>
+    <input type="checkbox" name="instructor name" id="<%= instructor.name %>" required>
     <%= instructor.name %>
     </input>
   <% end %><br>
   <label>Student: </label>
   <% Student.all.each do |student| %>
-    <input type="checkbox" name="flight[student_id]" id="<%= student.name %>" value="<%= student.name %>" required>
+    <input type="checkbox" name="student name" id="<%= student.name %>" required>
     <%= student.name %>
     </input>
   <% end %><br>
