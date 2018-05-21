@@ -1,4 +1,5 @@
 class InstructorController < ApplicationController
+  use Rack::Flash
 
   get '/instructors' do
     redirect "/" if !logged_in?
@@ -14,14 +15,20 @@ class InstructorController < ApplicationController
   #hard coded the admin_password for now.  May change to be dynamic later.
 
   post '/instructors' do
-    binding.pry
-    redirect "/instructors/signup" if Instructor.find_by(email: params[:instructor][:email])
-    redirect "/instructors/signup" if params.has_value?("")
-    redirect "/instructors/signup" if params[:instructor][:password] != params[:password_confirm]
-    redirect "/instructors/signup" if params[:admin_password] != "instructor password"
-    instructor = Instructor.create(params[:instructor])
-    session[:instructor_id] = instructor.id
-    redirect "/instructors/#{instructor.slug}"
+    if Instructor.find_by(email: params[:instructor][:email])
+      flash[:message] = "An account associated with this email already exists.  Please try again."
+      redirect "/instructors/signup"
+    elsif params[:instructor][:password] != params[:password_confirm]
+      flash[:message] = "Password does not match Confirm Password.  Please try again."
+      redirect "/instructors/signup"
+    elsif params[:admin_password] != "instructor password"
+      flash[:message] = "Incorrect Admin Password.  Please try again."
+      redirect "/instructors/signup"
+    else
+      instructor = Instructor.create(params[:instructor])
+      session[:instructor_id] = instructor.id
+      redirect "/instructors/#{instructor.slug}"
+    end
   end
 
   get '/instructors/login' do
