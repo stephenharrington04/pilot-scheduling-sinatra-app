@@ -7,7 +7,7 @@ class InstructorController < ApplicationController
   end
 
   get '/instructors/signup' do
-    redirect "/instructors/index" if logged_in?
+    redirect "/instructors" if logged_in?
     erb :'/instructors/create_instructor'
   end
 
@@ -23,7 +23,7 @@ class InstructorController < ApplicationController
   end
 
   get '/instructors/login' do
-    redirect "/instructors/index" if logged_in?
+    redirect "/instructors" if logged_in?
     erb :'/instructors/login'
   end
 
@@ -39,14 +39,12 @@ class InstructorController < ApplicationController
   get '/instructors/:slug' do
     redirect "/" if !logged_in?
     @instructor = Instructor.find_by_slug(params[:slug])
-    redirect "/instructors/index" if @instructor != current_instructor
     erb :'/instructors/show'
   end
 
   get '/instructors/:slug/edit' do
     redirect "/" if !logged_in?
     @instructor = Instructor.find_by_slug(params[:slug])
-    redirect "/instructors/index" if @instructor != current_instructor
     erb :'/instructors/edit'
   end
 
