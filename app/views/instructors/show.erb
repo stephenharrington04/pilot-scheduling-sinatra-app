@@ -7,9 +7,7 @@
 <h3>Here are your flights:</h3>
 <ol>
   <% @instructor.flights.each do |flight| %>
-    <li><%= flight.mission_number %></li>
-    <li><%= flight.mission_type %></li>
-    <li><%= flight.duration %></li>
+    <li><%= flight.callsign %></li>
   <% end %>
 </ol>
 
