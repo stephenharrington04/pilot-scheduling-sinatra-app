@@ -12,6 +12,7 @@
     <li><%= flight.duration %></li>
   <% end %>
 </ol>
+
 <h3>Here are your students:</h3>
 <ol>
   <% @instructor.students.each do |student| %>
@@ -19,6 +20,7 @@
     <li><%= student.course_type %></li>
   <% end %>
 </ol>
+
 <% if current_instructor == @instructor %>
   <form action="/instructors/<%= @instructor.slug %>/delete" method="GET">
     <input type="submit" value="Delete Account">
