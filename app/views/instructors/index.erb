@@ -5,7 +5,7 @@
 <% end %>
 
 <ol>
-  <% @instructors.all.each do |instructor| %>
+  <% @instructors.each do |instructor| %>
     <li> <a href="/instructors/<%= instructor.slug %>"><%= instructor.name %></a></li>
   <% end %>
 </ol>

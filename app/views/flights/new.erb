@@ -1,0 +1,17 @@
+<h1>Create A Flight!</h1>
+
+<form action="/flights" method="POST">
+  <label>Callsign: </label>
+  <input type="text" name="flight[callsign]" id="callsign" required><br>
+  <label>Mission Number: </label>
+  <input type="text" name="flight[mission_number]" id="mission_number" required><br>
+  <label>Duration: </label>
+  <input type="text" name="flight[duration]" id="duration" required><br>
+  <label>Mission Type: </label>
+  <input type="text" name="flight[mission_type]" id="mission_type" required><br>
+  <label>Instructor: </label>
+  <input type="text" name="flight[instructor_id]" id="instructor_id" required><br>
+  <label>Student: </label>
+  <input type="text" name="flight[student_id]" id="student_id" required><br>
+  <input type="submit" value="Create Flight">
+</form>

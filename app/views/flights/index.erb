@@ -1,0 +1,9 @@
+<h1>Flights</h1>
+
+<% @flights.each do |flight| %>
+  <a href="/flights/<%= flight.id %>"><%= flight.callsign %></a><br>
+<% end %>
+<br>
+<form action="/flights/new" method="GET">
+  <input type="submit" value="Create New Flight">
+</form>
