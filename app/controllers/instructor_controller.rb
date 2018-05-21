@@ -50,7 +50,15 @@ class InstructorController < ApplicationController
   end
 
   patch '/instructors/:slug' do
-
+    redirect "/instructors/#{instructor.slug}/edit" if params.has_value?("")
+    instructor = Instructor.find_by_slug(params[:slug])
+    redirect "/instructors" if current_instructor != instructor
+    if instructor && current_instructor.authenticate(params[:current_password])
+      instructor.update(params[:instructor])
+      instructor.save
+      redirect "/instructors/#{instructor.slug}"
+    end
+    redirect "/instructors/#{instructor.slug}/edit"
   end
 
   delete '/instructors/:slug/delete' do

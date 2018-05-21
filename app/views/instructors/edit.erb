@@ -1,12 +1,12 @@
 <h1>Edit Your Profile Here</h1>
-<form action="/instructors/<%= @instructor.slug %>/edit" method="POST">
+<form action="/instructors/<%= @instructor.slug %>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
   <label>Name: </label>
   <input type="text" name="instructor[name]" id="<%= @instructor.name %>" value="<%= @instructor.name %>"><br>
   <label>Email: </label>
   <input type="text" name="instructor[email]" id="<%= @instructor.email %>" value="<%= @instructor.email %>"><br>
   <label>Current Password: </label>
-  <input type="password" name="password" id="current_password"><br>
+  <input type="password" name="current_password" id="current_password"><br>
   <label>New Password: </label>
   <input type="password" name="instructor[password]" id="new_password"><br>
   <input type="submit" value="Edit Profile">
