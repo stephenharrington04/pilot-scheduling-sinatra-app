@@ -19,16 +19,28 @@ class ApplicationController < Sinatra::Base
  end
 
  helpers do
-   def logged_in?
-    !!session[:instructor_id] || !!session[:student_id]
+   def instructor_logged_in?
+    !!session[:instructor_id]
    end
 
-   def go_log_in
-      redirect "/login" if !logged_in?
+   def student_logged_in?
+     !!session[:student_id]
+   end
+
+   def instructor_go_log_in
+      redirect "/" if !instructor_logged_in?
+   end
+
+   def student_go_log_in
+      redirect "/" if !student_logged_in?
    end
 
    def current_instructor
       Instructor.find(session[:instructor_id])
+   end
+
+   def current_student
+      Student.find(session[:student_id])
    end
   end
 end

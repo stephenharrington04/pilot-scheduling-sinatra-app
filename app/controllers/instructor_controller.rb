@@ -2,13 +2,13 @@ class InstructorController < ApplicationController
   use Rack::Flash
 
   get '/instructors' do
-    redirect "/" if !logged_in?
+    instructor_go_log_in
     @instructors = Instructor.all
     erb :'/instructors/index'
   end
 
   get '/instructors/signup' do
-    redirect "/instructors" if logged_in?
+    redirect "/instructors" if instructor_logged_in?
     erb :'/instructors/create_instructor'
   end
 
@@ -32,7 +32,7 @@ class InstructorController < ApplicationController
   end
 
   get '/instructors/login' do
-    redirect "/instructors" if logged_in?
+    redirect "/instructors" if instructor_logged_in?
     erb :'/instructors/login'
   end
 
@@ -46,13 +46,13 @@ class InstructorController < ApplicationController
   end
 
   get '/instructors/:slug' do
-    redirect "/" if !logged_in?
+    instructor_go_log_in
     @instructor = Instructor.find_by_slug(params[:slug])
     erb :'/instructors/show'
   end
 
   get '/instructors/:slug/edit' do
-    redirect "/" if !logged_in?
+    instructor_go_log_in
     @instructor = Instructor.find_by_slug(params[:slug])
     redirect "/instructors" if current_instructor != @instructor
     erb :'/instructors/edit'
