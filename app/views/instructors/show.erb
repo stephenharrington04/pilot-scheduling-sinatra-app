@@ -14,13 +14,15 @@
     <li><%= student.course_type %></li>
   <% end %>
 </ol>
-<form action="/instructors/<%= @instructor.slug %>/delete" method="POST">
-  <input type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete Account">
-</form>
-<form action="/instructors/<%= @instructor.slug %>/edit" method="GET">
-  <input type="submit" value="Edit Account">
-</form>
+<% if current_instructor == @instructor %>
+  <form action="/instructors/<%= @instructor.slug %>/delete" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Account">
+  </form>
+  <form action="/instructors/<%= @instructor.slug %>/edit" method="GET">
+    <input type="submit" value="Edit Account">
+  </form>
+<% end %>
 <form action="/logout" method="GET">
   <input type="submit" value="Logout">
 </form>
