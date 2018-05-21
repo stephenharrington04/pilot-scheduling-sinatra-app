@@ -12,7 +12,7 @@ class InstructorController < ApplicationController
       flash[:message] = "You're already Logged In."
       redirect "/instructors"
     else
-      erb :'/instructors/create_instructor'
+      erb :'/instructors/new'
     end
   end
 
@@ -91,11 +91,27 @@ class InstructorController < ApplicationController
     end
   end
 
+  get '/instructors/:slug/delete' do
+    instructor_go_log_in
+    @instructor = Instructor.find_by_slug(params[:slug])
+    if current_instructor != @instructor
+      flash[:message] = "You do not have permissions to Delete that account."
+      redirect "/instructors"
+    else
+      erb :'/instructors/delete'
+    end
+  end
+
   delete '/instructors/:slug/delete' do
-    redirect "/instructors" if current_instructor != Instructor.find_by_slug(params[:slug])
-    current_instructor.delete
-    session.clear
-    redirect "/"
+    instructor = Instructor.find_by_slug(params[:slug])
+    if instructor && current_instructor.authenticate(params[:password])
+      current_instructor.delete
+      session.clear
+      redirect "/"
+    else
+      flash[:message] = "Incorrect Password.  Please Try Again."
+      redirect "/instructors/#{instructor.slug}/delete"
+    end
   end
 
 end

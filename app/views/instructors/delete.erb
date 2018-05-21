@@ -1,0 +1,12 @@
+<h3>Are you sure you want to delete this account?</h3>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %><br>
+<% end %>
+
+<form action="/instructors/<%= @instructor.slug %>/delete" method="POST">
+  <input type="hidden" name="_method" value="DELETE">
+  <label>Please Enter Your Password To Confirm: </label><br>
+  <input type="password" name="password" id="password"><br>
+  <input type="submit" value="Delete Account">
+</form>
