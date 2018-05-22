@@ -8,10 +8,10 @@
 </ul>
 <% if current_instructor == @flight.instructor %>
   <form action="/flights/<%= @flight.id %>/delete" method="GET">
-    <input type="submit" value="Delete Account">
+    <input type="submit" value="Delete Flight">
   </form>
   <form action="/flights/<%= @flight.id %>/edit" method="GET">
-    <input type="submit" value="Edit Account">
+    <input type="submit" value="Edit Flight">
   </form>
 <% end %>
 <form action="/logout" method="GET">
