@@ -59,12 +59,12 @@ class FlightController < ApplicationController
       erb :'/flights/edit'
     end
   end
-#LEFT OFF HERE WITH LOG IN VALIDATION.  NEED TO PICK UP HERE TOMORROW
+
   patch '/flights/:id' do
     flight = Flight.find_by(params[:id])
     if params[:flight][:duration].to_f <= 0
       flash[:message] = "You must enter a duration greater than 0.0"
-      redirect "/flights/new"
+      redirect "/flights/#{flight.id}/edit"
     end
     flight.update(params[:flight])
     flight.save
@@ -72,6 +72,16 @@ class FlightController < ApplicationController
   end
 
   get '/flights/:id/delete' do
+    flight = Flight.find(params[:id])
+    if student_logged_in?
+      flash[:message] = "Sorry, Only Instructors May Delete A Flight."
+      redirect "/flights/#{flight.id}"
+    elsif !instructor_logged_in?
+      redirect "/flights/#{flight.id}"
+    elsif current_instructor != flight.instructor
+      flash[:message] = "Sorry, Only #{flight.instructor.name} May Delete #{flight.callsign}."
+      redirect "/flights/#{flight.id}"
+    else
     @flight = Flight.find(params[:id])
     erb :'flights/delete'
   end
