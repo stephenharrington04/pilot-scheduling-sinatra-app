@@ -38,5 +38,10 @@ class FlightController < ApplicationController
     redirect "/flights/#{flight.id}"
   end
 
+  get '/flights/:id/delete' do
+    @flight = Flight.find(params[:id])
+    erb :'flights/delete'
+  end
+
 
 end
