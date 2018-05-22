@@ -27,4 +27,10 @@ class FlightController < ApplicationController
     erb :'/flights/show'
   end
 
+  get '/flights/:id/edit' do
+    @flight = Flight.find(params[:id])
+    erb :'/flights/edit'
+  end
+
+
 end

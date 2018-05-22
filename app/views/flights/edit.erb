@@ -1,0 +1,34 @@
+<h1>Edit <%= @flight.callsign %></h1>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %><br>
+<% end %>
+
+<form action="/flights/<%= @flight.id %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <label>Callsign: </label>
+  <input type="text" name="flight[callsign]" id="callsign" ><br>
+  <label>Date of Flight: </label>
+  <input type="date" name="flight[flight_date]" id="flight_date"><br>
+  <label>Mission Number: </label>
+  <input type="text" name="flight[mission_number]" id="mission_number"><br>
+  <label>Duration: </label>
+  <input type="text" name="flight[duration]" id="duration"><br>
+  <label>Mission Type: </label>
+  <input type="text" name="flight[mission_type]" id="mission_type"><br>
+  <label>Instructor: </label>
+  <% Instructor.all.each do |instructor| %>
+    <input type="checkbox" name="ip_name" id="<%= instructor.name %>" value="<%= instructor.name %>"
+    <%= 'checked' if @flight.instructor == Instructor.find(params[:id]) %>>
+    <%= instructor.name %>
+    </input>
+  <% end %><br>
+  <label>Student: </label>
+  <% Student.all.each do |student| %>
+    <input type="checkbox" name="student_name" id="<%= student.name %>" value="<%= student.name %>"
+    <%= 'checked' if @flight.student = Student.find_by(params[:id]) %>>
+    <%= student.name %>
+    </input>
+  <% end %><br>
+  <input type="submit" value="Edit Flight">
+</form>

@@ -7,7 +7,7 @@
 <h3>Here are your flights:</h3>
 <ol>
   <% @instructor.flights.each do |flight| %>
-      <li><%= flight.callsign %></li><br>
+      <li><a href="/flights/<%= flight.id %>"><%= flight.callsign %></a></li><br>
   <% end %>
 </ol>
 
