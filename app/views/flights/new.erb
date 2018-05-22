@@ -16,16 +16,16 @@
   <label>Mission Type: </label>
   <input type="text" name="flight[mission_type]" id="mission_type" required><br>
   <label>Instructor: </label>
-  <% Instructor.all.each do |instructor| %>
-    <input type="checkbox" name="ip_name" id="<%= instructor.name %>" value="<%= instructor.name %>" required>
-    <%= instructor.name %>
-    </input>
-  <% end %><br>
+  <select name="ip_name" required>
+    <% Instructor.all.each do |instructor| %>
+      <option value="<%= instructor.name %>"><%= instructor.name %></option>
+    <% end %>
+  </select><br>
   <label>Student: </label>
-  <% Student.all.each do |student| %>
-    <input type="checkbox" name="student_name" id="<%= student.name %>" value="<%= student.name %>" required>
-    <%= student.name %>
-    </input>
-  <% end %><br>
+  <select name="student_name" required>
+    <% Student.all.each do |student| %>
+      <option value="<%= student.name %>"><%= student.name %></option>
+    <% end %>
+  </select><br>
   <input type="submit" value="Create Flight">
 </form>
