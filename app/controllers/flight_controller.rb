@@ -1,8 +1,12 @@
 class FlightController < ApplicationController
 
   get '/flights' do
-    @flights = Flight.all
-    erb :'/flights/index'
+    if instructor_logged_in? || student_logged_in?
+      @flights = Flight.all
+      erb :'/flights/index'
+    end
+    flash[:message] = "You muse be logged in to view this page."
+    redirect "/"
   end
 
   get '/flights/new' do
