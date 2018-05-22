@@ -7,7 +7,7 @@ class InstructorController < ApplicationController
     erb :'/instructors/index'
   end
 
-  get '/instructors/signup' do
+  get '/instructors/new' do
     if instructor_logged_in?
       flash[:message] = "You're already Logged In."
       redirect "/instructors"
@@ -20,13 +20,13 @@ class InstructorController < ApplicationController
   post '/instructors' do
     if Instructor.find_by(email: params[:instructor][:email])
       flash[:message] = "An account associated with this email already exists.  Please try again."
-      redirect "/instructors/signup"
+      redirect "/instructors/new"
     elsif params[:instructor][:password] != params[:password_confirm]
       flash[:message] = "Password does not match Confirm Password.  Please try again."
-      redirect "/instructors/signup"
+      redirect "/instructors/new"
     elsif params[:admin_password] != "instructor password"
       flash[:message] = "Incorrect Admin Password.  Please try again."
-      redirect "/instructors/signup"
+      redirect "/instructors/new"
     else
       instructor = Instructor.create(params[:instructor])
       session[:instructor_id] = instructor.id

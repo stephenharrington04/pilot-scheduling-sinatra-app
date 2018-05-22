@@ -107,6 +107,4 @@ class FlightController < ApplicationController
     redirect "/flights/#{@flight.id}/delete"
   end
 
-
-
 end
