@@ -35,8 +35,13 @@ class FlightController < ApplicationController
   end
 
   get '/flights/:id' do
-    @flight = Flight.find(params[:id])
-    erb :'/flights/show'
+    if instructor_logged_in? || student_logged_in?
+      @flight = Flight.find(params[:id])
+      erb :'/flights/show'
+    else
+      flash[:message] = "You muse be logged in to view this page."
+      redirect "/"
+    end
   end
 
   get '/flights/:id/edit' do
