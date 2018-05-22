@@ -1,9 +1,13 @@
 class StudentController < ApplicationController
 
   get '/students' do
-    student_go_log_in
-    @students = Student.all
-    erb :'/students/index'
+    if instructor_logged_in? || student_logged_in?
+      @students = Student.all
+      erb :'/students/index'
+    else
+      flash[:message] = "You muse be logged in to view this page."
+      redirect "/"
+    end
   end
 
   get '/students/new' do
