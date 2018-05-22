@@ -6,3 +6,14 @@
   <li>Mission Type: <%= @flight.mission_type %></li>
   <li>Duration: <%= @flight.duration %></li><br>
 </ul>
+<% if current_instructor == @flight.instructor %>
+  <form action="/flights/<%= @flights.id %>/delete" method="GET">
+    <input type="submit" value="Delete Account">
+  </form>
+  <form action="/flights/<%= @flights.id %>/edit" method="GET">
+    <input type="submit" value="Edit Account">
+  </form>
+<% end %>
+<form action="/logout" method="GET">
+  <input type="submit" value="Logout">
+</form>
