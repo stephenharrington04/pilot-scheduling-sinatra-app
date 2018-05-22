@@ -4,13 +4,22 @@ class FlightController < ApplicationController
     if instructor_logged_in? || student_logged_in?
       @flights = Flight.all
       erb :'/flights/index'
+    else
+      flash[:message] = "You muse be logged in to view this page."
+      redirect "/"
     end
-    flash[:message] = "You muse be logged in to view this page."
-    redirect "/"
   end
 
   get '/flights/new' do
-    erb :'flights/new'
+    if instructor_logged_in?
+      erb :'flights/new'
+    elsif student_logged_in?
+      flash[:message] = "Sorry, Only Instructors May Create A New Flight."
+      redirect "/flights"
+    else
+      flash[:message] = "You must be logged in to view this page."
+      redirect "/"
+    end
   end
 
   post '/flights' do
