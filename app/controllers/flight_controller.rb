@@ -59,9 +59,13 @@ class FlightController < ApplicationController
       erb :'/flights/edit'
     end
   end
-
+#LEFT OFF HERE WITH LOG IN VALIDATION.  NEED TO PICK UP HERE TOMORROW
   patch '/flights/:id' do
     flight = Flight.find_by(params[:id])
+    if params[:flight][:duration].to_f <= 0
+      flash[:message] = "You must enter a duration greater than 0.0"
+      redirect "/flights/new"
+    end
     flight.update(params[:flight])
     flight.save
     redirect "/flights/#{flight.id}"
