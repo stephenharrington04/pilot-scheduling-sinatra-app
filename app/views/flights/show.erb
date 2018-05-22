@@ -7,10 +7,10 @@
   <li>Duration: <%= @flight.duration %></li><br>
 </ul>
 <% if current_instructor == @flight.instructor %>
-  <form action="/flights/<%= @flights.id %>/delete" method="GET">
+  <form action="/flights/<%= @flight.id %>/delete" method="GET">
     <input type="submit" value="Delete Account">
   </form>
-  <form action="/flights/<%= @flights.id %>/edit" method="GET">
+  <form action="/flights/<%= @flight.id %>/edit" method="GET">
     <input type="submit" value="Edit Account">
   </form>
 <% end %>
