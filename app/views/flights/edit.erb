@@ -17,18 +17,22 @@
   <label>Mission Type: </label>
   <input type="text" name="flight[mission_type]" id="mission_type"><br>
   <label>Instructor: </label>
-  <% Instructor.all.each do |instructor| %>
-    <input type="checkbox" name="ip_name" id="<%= instructor.name %>" value="<%= instructor.name %>"
-    <%= 'checked' if @flight.instructor == instructor %>>
-    <%= instructor.name %>
-    </input>
-  <% end %><br>
+  <select name="ip_name">
+    <option value="<%= @flight.instructor.name %>" selected><%= @flight.instructor.name %></option>
+    <% Instructor.all.each do |instructor| %>
+      <% if instructor != @flight.instructor %>
+        <option value="<%= instructor.name %>"><%= instructor.name %></option>
+      <% end %>
+    <% end %>
+  </select><br>
   <label>Student: </label>
-  <% Student.all.each do |student| %>
-    <input type="checkbox" name="student_name" id="<%= student.name %>" value="<%= student.name %>"
-    <%= 'checked' if @flight.student = student %>>
-    <%= student.name %>
-    </input>
-  <% end %><br>
+  <select name="student_name">
+    <option value="<%= @flight.student.name %>" selected><%= @flight.student.name %></option>
+    <% Student.all.each do |student| %>
+      <% if student != @flight.student %>
+        <option value="<%= student.name %>"><%= student.name %></option>
+      <% end %>
+    <% end %>
+  </select><br>
   <input type="submit" value="Edit Flight">
 </form>
