@@ -19,14 +19,14 @@
   <label>Instructor: </label>
   <% Instructor.all.each do |instructor| %>
     <input type="checkbox" name="ip_name" id="<%= instructor.name %>" value="<%= instructor.name %>"
-    <%= 'checked' if @flight.instructor == Instructor.find(params[:id]) %>>
+    <%= 'checked' if @flight.instructor == instructor %>>
     <%= instructor.name %>
     </input>
   <% end %><br>
   <label>Student: </label>
   <% Student.all.each do |student| %>
     <input type="checkbox" name="student_name" id="<%= student.name %>" value="<%= student.name %>"
-    <%= 'checked' if @flight.student = Student.find_by(params[:id]) %>>
+    <%= 'checked' if @flight.student = student %>>
     <%= student.name %>
     </input>
   <% end %><br>
