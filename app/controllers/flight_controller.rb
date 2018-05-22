@@ -23,15 +23,19 @@ class FlightController < ApplicationController
   end
 
   post '/flights' do
-    if params[:flight][:duration].to_f <= 0
+    if Flight.find_by(mission_number: params[:flight][:mission_number])
+        flash[:message] = "A Flight Associated With This Mission Number Already Exists.  Please Try Again."
+        redirect "/flights/new"
+    elsif params[:flight][:duration].to_f <= 0
       flash[:message] = "You must enter a duration greater than 0.0"
       redirect "/flights/new"
+    else
+      flight = Flight.create(params[:flight])
+      flight.instructor = Instructor.find_by(name: params[:ip_name])
+      flight.student = Student.find_by(name: params[:student_name])
+      flight.save
+      redirect "/flights/#{flight.id}"
     end
-    flight = Flight.create(params[:flight])
-    flight.instructor = Instructor.find_by(name: params[:ip_name])
-    flight.student = Student.find_by(name: params[:student_name])
-    flight.save
-    redirect "/flights/#{flight.id}"
   end
 
   get '/flights/:id' do
@@ -60,6 +64,7 @@ class FlightController < ApplicationController
     end
   end
 
+# STILL HAVE TO VALIDATE THIS AFTER CREATING
   patch '/flights/:id' do
     flight = Flight.find_by(params[:id])
     if params[:flight][:duration].to_f <= 0
@@ -82,8 +87,9 @@ class FlightController < ApplicationController
       flash[:message] = "Sorry, Only #{flight.instructor.name} May Delete #{flight.callsign}."
       redirect "/flights/#{flight.id}"
     else
-    @flight = Flight.find(params[:id])
-    erb :'flights/delete'
+      @flight = Flight.find(params[:id])
+      erb :'flights/delete'
+    end
   end
 
   delete '/flights/:id/delete' do

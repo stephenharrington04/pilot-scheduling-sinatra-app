@@ -9,6 +9,7 @@
   <li>Instructor: <%= @flight.instructor.name %></li>
   <li>Student: insert flight.student.name here </li>
   <li>Mission Type: <%= @flight.mission_type %></li>
+  <li>Mission Number: <%= @flight.mission_number%></li>
   <li>Duration: <%= @flight.duration %></li><br>
 </ul>
 <% if current_instructor == @flight.instructor %>
