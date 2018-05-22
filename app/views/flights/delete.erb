@@ -1,0 +1,7 @@
+<h3>Confirm You Want to Delete <%= @flight.callsign %>?</h3>
+<form action="/flights/<%= @flight.id %>/delete" method="POST">
+  <input type="hidden" name="_method" value="DELETE">
+  <label>Enter Admin Password: </label>
+  <input type="password" name="admin_password" id="admin_password"><br>
+  <input type="submit" value="Delete Flight">
+</form>
