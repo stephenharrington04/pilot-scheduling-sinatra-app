@@ -67,13 +67,17 @@ class FlightController < ApplicationController
 # STILL HAVE TO VALIDATE THIS AFTER CREATING
   patch '/flights/:id' do
     flight = Flight.find_by(params[:id])
-    if params[:flight][:duration].to_f <= 0
+    if Flight.find_by(mission_number: params[:flight][:mission_number]) && params[:flight][:mission_number] != flight.mission_number
+        flash[:message] = "A Flight Associated With This Mission Number Already Exists.  Please Try Again."
+        redirect "/flights/#{flight.id}/edit"
+    elsif params[:flight][:duration].to_f <= 0
       flash[:message] = "You must enter a duration greater than 0.0"
       redirect "/flights/#{flight.id}/edit"
+    else
+      flight.update(params[:flight])
+      flight.save
+      redirect "/flights/#{flight.id}"
     end
-    flight.update(params[:flight])
-    flight.save
-    redirect "/flights/#{flight.id}"
   end
 
   get '/flights/:id/delete' do
