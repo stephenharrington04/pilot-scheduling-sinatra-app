@@ -1,4 +1,9 @@
 <%= @flight.callsign %>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %><br>
+<% end %>
+
 <ul>
   <li>Date of Flight: <%= @flight.flight_date %></li>
   <li>Instructor: <%= @flight.instructor.name %></li>

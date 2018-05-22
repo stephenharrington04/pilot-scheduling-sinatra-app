@@ -1,5 +1,9 @@
 <h1>Flights</h1>
 
+<% if flash.has?(:message) %>
+  <%= flash[:message] %><br>
+<% end %>
+
 <% @flights.each do |flight| %>
   <ol>
     <li><a href="/flights/<%= flight.id %>"><%= flight.callsign %></a></li><br>

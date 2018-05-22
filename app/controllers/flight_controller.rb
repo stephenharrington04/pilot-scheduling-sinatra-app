@@ -43,5 +43,17 @@ class FlightController < ApplicationController
     erb :'flights/delete'
   end
 
+  delete '/flights/:id/delete' do
+    @flight = Flight.find(params[:id])
+    if current_instructor.authenticate(params[:instructor_password])
+      @flight.delete
+      flash[:message] = "Successfully Deleted Flight!"
+      redirect "/flights"
+    end
+    flash[:message] = "Incorrect Password.  Please Try Again."
+    redirect "/flights/#{@flight.id}/delete"
+  end
+
+
 
 end
