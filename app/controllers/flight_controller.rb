@@ -10,7 +10,6 @@ class FlightController < ApplicationController
   end
 
   post '/flights' do
-    binding.pry
     if params[:flight][:duration].to_f <= 0
       flash[:message] = "You must enter a duration greater than 0.0"
       redirect "/flights/new"
@@ -30,6 +29,13 @@ class FlightController < ApplicationController
   get '/flights/:id/edit' do
     @flight = Flight.find(params[:id])
     erb :'/flights/edit'
+  end
+
+  patch '/flights/:id' do
+    flight = Flight.find_by(params[:id])
+    flight.update(params[:flight])
+    flight.save
+    redirect "/flights/#{flight.id}"
   end
 
 
