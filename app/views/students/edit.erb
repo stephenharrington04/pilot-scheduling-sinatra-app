@@ -1,1 +1,20 @@
-edit.erb
+<h1>Edit <%= @student.name %>'s' Profile Here</h1>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %><br>
+<% end %>
+
+<form action="/students/<%= @student.slug %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <label>Name: </label>
+  <input type="text" name="student[name]" id="<%= @student.name %>" value="<%= @student.name %>"><br>
+  <label>Email: </label>
+  <input type="text" name="student[email]" id="<%= @student.email %>" value="<%= @student.email %>"><br>
+  <label>Current Password: </label>
+  <input type="password" name="current_password" id="current_password"><br>
+  <label>New Password: </label>
+  <input type="password" name="student[password]" id="new_password"><br>
+  <label>Confirm New Password: </label>
+  <input type="password" name="password_confirm" id="password_confirm">
+  <input type="submit" value="Edit Profile">
+</form>
