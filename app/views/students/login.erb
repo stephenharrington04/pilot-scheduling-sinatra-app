@@ -1,0 +1,13 @@
+<h1>Students Log In Here</h1>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %><br>
+<% end %>
+
+<form action="/students/login" method="POST">
+  <label>Email: </label>
+  <input type="text" name="email" id="student_email"><br>
+  <label>Password: </label>
+  <input type="password" name="password" id="student_password"><br>
+  <input type="submit" value="Log In">
+</form>
