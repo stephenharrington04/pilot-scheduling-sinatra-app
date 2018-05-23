@@ -1,0 +1,17 @@
+<h1>Students Sign Up Today!</h1>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %><br>
+<% end %>
+
+<form action="/students" method="POST">
+  <label>Name: </label>
+  <input type="text" name="student[name]" id="student name" required>
+  <label>Email: </label>
+  <input type="text" name="student[email]" id="student email" required>
+  <label>Password: </label>
+  <input type="password" name="student[password]" id="student password" required>
+  <label>Confirm Password: </label>
+  <input type="password" name="student_confirm" id="password_confirm" required>
+  <input type="submit" value="Create Account">
+</form>

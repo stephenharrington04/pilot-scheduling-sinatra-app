@@ -22,12 +22,12 @@ class StudentController < ApplicationController
     if Student.find_by(email: params[:student][:email])
       flash[:message] = "An account associated with this email already exists.  Please try again."
       redirect "/students/new"
-    elsif params[:student][:password] != params[:password_confirm]
+    elsif params[:student][:password] != params[:student_confirm]
       flash[:message] = "Password does not match Confirm Password.  Please try again."
       redirect "/students/new"
     else
       student = Student.create(params[:student])
-      if student_logged_in? == false
+      if instructor_logged_in? == false
         session[:student_id] = student.id
       end
       flash[:message] = "Successfully Created an Account!"
