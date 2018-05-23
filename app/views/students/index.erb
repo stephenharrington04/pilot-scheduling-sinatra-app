@@ -1,0 +1,11 @@
+<h1>Welcome to the Students Directory</h1>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %><br>
+<% end %>
+
+<ol>
+  <% @students.each do |student| %>
+    <li> <a href="/student/<%= student.slug %>"><%= student.name %></a></li>
+  <% end %>
+</ol>
