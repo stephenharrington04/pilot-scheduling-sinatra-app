@@ -66,13 +66,14 @@ class StudentController < ApplicationController
 
   get '/students/:slug/edit' do
     @student = Student.find_by_slug(params[:slug])
-    if (student_logged_in? && current_student != @student) || instructor_logged_in? == false
-        flash[:message] = "You do not have permissions to edit THAT page."
-        redirect "/students"
-    elsif
-      student_go_log_in
-    else
+    if instructor_logged_in? || (student_logged_in? && current_student == @student)
       erb :'/students/edit'
+    elsif student_logged_in?
+      flash[:message] = "You do not have permissions to edit THAT page."
+      redirect "/students"
+    else
+      flash[:message] = "You must be logged in to view that page."
+      redirect "/"
     end
   end
 
