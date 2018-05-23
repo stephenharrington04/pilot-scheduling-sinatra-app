@@ -1,0 +1,31 @@
+<h1>Welcome To <%= @student.name %>'s Home Page</h1>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %><br>
+<% end %>
+
+<h3>Here are <%= @student.name %>'s flights:</h3>
+<ol>
+  <% @student.flights.each do |flight| %>
+      <li><a href="/flights/<%= flight.id %>"><%= flight.callsign %></a></li><br>
+  <% end %>
+</ol>
+
+<h3>Here are <%= @student.name %>'s instructors:</h3>
+<ol>
+  <% @student.instructors.each do |instructor| %>
+    <li><%= instructor.name %></li>
+  <% end %>
+</ol>
+
+<% if instructor_logged_in? || current_student == @student %>
+  <form action="/students/<%= @student.slug %>/delete" method="GET">
+    <input type="submit" value="Delete Account">
+  </form>
+  <form action="/students/<%= @student.slug %>/edit" method="GET">
+    <input type="submit" value="Edit Account">
+  </form>
+<% end %>
+<form action="/logout" method="GET">
+  <input type="submit" value="Logout">
+</form>
