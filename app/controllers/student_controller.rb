@@ -115,17 +115,16 @@ class StudentController < ApplicationController
   end
 
   get '/students/:slug/delete' do
-    if student_logged_in? || instructor_logged_in?
-      @student = Student.find_by_slug(params[:slug])
-      if current_student != @student || instructor_logged_in? == false
-        flash[:message] = "You do not have permissions to Delete that account."
-        redirect "/students"
-      end
+    @student = Student.find_by_slug(params[:slug])
+    if instructor_logged_in? || (student_logged_in? && current_student == @student)
+      erb :'/students/delete'
+    elsif student_logged_in?
+      flash[:message] = "You do not have permissions to delete THAT page."
+      redirect "/students"
     else
-      flash[:message] = "You muse be logged in to view this page."
+      flash[:message] = "You must be logged in to view that page."
       redirect "/"
     end
-    erb :'/students/delete'
   end
 
   delete '/students/:slug/delete' do
