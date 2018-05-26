@@ -1,4 +1,4 @@
-<h1>Edit <%= @student.name %>'s' Profile Here</h1>
+<h1>Edit <%= @student.name %>'s Profile Here</h1>
 
 <% if flash.has?(:message) %>
   <%= flash[:message] %><br>
@@ -6,15 +6,24 @@
 
 <form action="/students/<%= @student.slug %>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
-  <label>Name: </label>
+  <label>Student Name: </label>
   <input type="text" name="student[name]" id="<%= @student.name %>" value="<%= @student.name %>"><br>
-  <label>Email: </label>
+  <label>Student Email: </label>
   <input type="text" name="student[email]" id="<%= @student.email %>" value="<%= @student.email %>"><br>
-  <label>Current Password: </label>
-  <input type="password" name="current_password" id="current_password"><br>
-  <label>New Password: </label>
+
+  <% if student_logged_in? %>
+    <label>Student's Current Password: </label>
+    <input type="password" name="current_password" id="current_password"><br>
+  <% end %>
+
+  <% if instructor_logged_in? %>
+    <label>Instructor's Account Password: </label>
+    <input type="password" name="ip_password" id="ip_password"><br>
+  <% end %>
+
+  <label>Student's New Password: </label>
   <input type="password" name="student[password]" id="new_password"><br>
-  <label>Confirm New Password: </label>
+  <label>Confirm Student's New Password: </label>
   <input type="password" name="password_confirm" id="password_confirm">
   <input type="submit" value="Edit Profile">
 </form>
