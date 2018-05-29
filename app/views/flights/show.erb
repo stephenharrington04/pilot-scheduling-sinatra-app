@@ -12,7 +12,7 @@
   <li>Mission Number: <%= @flight.mission_number%></li>
   <li>Duration: <%= @flight.duration %></li><br>
 </ul>
-<% if current_instructor == @flight.instructor %>
+<% if instructor_logged_in? && current_instructor == @flight.instructor %>
   <form action="/flights/<%= @flight.id %>/delete" method="GET">
     <input type="submit" value="Delete Flight">
   </form>

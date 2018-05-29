@@ -2,15 +2,22 @@ class InstructorController < ApplicationController
   use Rack::Flash
 
   get '/instructors' do
-    instructor_go_log_in
-    @instructors = Instructor.all
-    erb :'/instructors/index'
+    if instructor_logged_in? || student_logged_in?
+      @instructors = Instructor.all
+      erb :'/instructors/index'
+    else
+      flash[:message] = "You must be logged in to view that page."
+      redirect "/"
+    end
   end
 
   get '/instructors/new' do
     if instructor_logged_in?
       flash[:message] = "You're already Logged In."
       redirect "/instructors"
+    elsif student_logged_in?
+      flash[:message] = "You're already Logged In as a Student"
+      redirect "/"
     end
     erb :'/instructors/new'
   end
@@ -39,6 +46,9 @@ class InstructorController < ApplicationController
     if instructor_logged_in?
       flash[:message] = "You're already Logged In."
       redirect "/instructors"
+    elsif student_logged_in?
+      flash[:message] = "You're already Logged In as a Student"
+      redirect "/"
     end
     erb :'/instructors/login'
   end
@@ -55,11 +65,20 @@ class InstructorController < ApplicationController
   end
 
   get '/instructors/:slug' do
-    instructor_go_log_in
-    @instructor = Instructor.find_by_slug(params[:slug])
-    erb :'/instructors/show'
+    if instructor_logged_in?
+      @instructor = Instructor.find_by_slug(params[:slug])
+      erb :'/instructors/show'
+    elsif student_logged_in?
+      flash[:message] = "Students cannot view individual instructor's profile pages."
+      redirect "/"
+    else
+      flash[:message] = "You must be logged in to view that page."
+      redirect "/"
+    end
   end
 
+
+#Stopped here 13:15 29 May 18.  Need to keep validating if a student is logged in
   get '/instructors/:slug/edit' do
     instructor_go_log_in
     @instructor = Instructor.find_by_slug(params[:slug])
