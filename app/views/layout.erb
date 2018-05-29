@@ -5,13 +5,20 @@
     <title>Pilot Scheduling</title>
   </head>
   <header>
-    <% if student_logged_in? %>
-      <a href="/students/<%= current_student.slug %>"><%= current_student.name %></a>
-    <% elsif instructor_logged_in? %>
-      <a href="/instructors/<%= current_instructor.slug %>"><%= current_instructor.name %></a>
-    <% else %>
-      <a href="/">Log in here.</a></h2>
-    <% end %>
+    <h2>Pilot Scheduling Application</h2>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/flights">Flights</a>
+      <a href="/instructors">Instructors</a>
+      <a href="/students">Students</a>
+      <% if student_logged_in? %>
+        <a href="/students/<%= current_student.slug %>"><%= current_student.name %></a>
+      <% elsif instructor_logged_in? %>
+        <a href="/instructors/<%= current_instructor.slug %>"><%= current_instructor.name %></a>
+      <% else %>
+        <a href="/">Log in here.</a></h2>
+      <% end %>
+    </nav>
   </header>
   <body>
     <%= yield %>
