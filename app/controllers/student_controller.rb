@@ -115,6 +115,7 @@ class StudentController < ApplicationController
   end
 
   delete '/students/:slug/delete' do
+    @student = Student.find_by_slug(params[:slug])
     if current_student.authenticate(params[:password]) || current_instructor.authenticate(params[:password])
       current_student.delete
       session.clear
