@@ -116,14 +116,19 @@ class StudentController < ApplicationController
 
   delete '/students/:slug/delete' do
     @student = Student.find_by_slug(params[:slug])
-    if current_student.authenticate(params[:password]) || current_instructor.authenticate(params[:password])
+    if student_logged_in? && current_student.authenticate(params[:password])
       current_student.delete
       session.clear
       flash[:message] = "Successfully Deleted Account!"
       redirect "/"
+    elsif instructor_logged_in? && current_instructor.authenticate(params[:password])
+      @student.delete
+      flash[:message] = "Successfully Deleted Account!"
+      redirect "/"
+    else
+      flash[:message] = "Incorrect Password.  Please Try Again."
+      redirect "/students/#{current_student.slug}/delete"
     end
-    flash[:message] = "Incorrect Password.  Please Try Again."
-    redirect "/students/#{current_student.slug}/delete"
   end
 
 end
