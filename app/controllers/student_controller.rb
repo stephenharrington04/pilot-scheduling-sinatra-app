@@ -79,38 +79,25 @@ class StudentController < ApplicationController
 
   patch '/students/:slug' do
     student = Student.find_by_slug(params[:slug])
-
-    if student_logged_in?
-      if params[:student][:password] != params[:password_confirm]
-        flash[:message] = "New Password does not match Confirm Password.  Please Try Again."
-        redirect "/students/#{student.slug}/edit"
-      elsif Student.find_by(email: params[:student][:email]) && params[:student][:email] != student.email
-        flash[:message] = "An account associated with this email already exists.  Please try again."
-        redirect "/students/#{student.slug}/edit"
-      elsif student && current_student.authenticate(params[:current_password])
-        student.update(params[:student])
-        student.save
-        flash[:message] = "Account Successfully Updated!"
-        redirect "/students/#{student.slug}"
-      else
-        flash[:message] = "Current Password was incorrect.  Please Try Again."
-        redirect "/students/#{student.slug}/edit"
-      end
-    end
-
-    if instructor_logged_in?
-      if Student.find_by(email: params[:student][:email]) && params[:student][:email] != student.email
-        flash[:message] = "An account associated with this email already exists.  Please try again."
-        redirect "/students/#{student.slug}/edit"
-      elsif student && current_instructor.authenticate(params[:ip_password])
-        student.update(params[:student])
-        student.save
-        flash[:message] = "Account Successfully Updated!"
-        redirect "/students/#{student.slug}"
-      else
-        flash[:message] = "Your Account Password was incorrect.  Please Try Again."
-        redirect "/students/#{student.slug}/edit"
-      end
+    if params[:student][:password] != params[:password_confirm]
+      flash[:message] = "New Password does not match Confirm Password.  Please Try Again."
+      redirect "/students/#{student.slug}/edit"
+    elsif Student.find_by(email: params[:student][:email]) && params[:student][:email] != student.email
+      flash[:message] = "An account associated with this email already exists.  Please try again."
+      redirect "/students/#{student.slug}/edit"
+    elsif student_logged_in? && student && current_student.authenticate(params[:current_password])
+      student.update(params[:student])
+      student.save
+      flash[:message] = "Account Successfully Updated!"
+      redirect "/students/#{student.slug}"
+    elsif instructor_logged_in? && student && current_instructor.authenticate(params[:ip_password])
+      student.update(params[:student])
+      student.save
+      flash[:message] = "Account Successfully Updated!"
+      redirect "/students/#{student.slug}"
+    else
+      flash[:message] = "Current Account Password was incorrect.  Please Try Again."
+      redirect "/students/#{student.slug}/edit"
     end
   end
 
