@@ -14,8 +14,8 @@
 <h3>Here are your students:</h3>
 <ol>
   <% @instructor.students.each do |student| %>
-    <li><%= student.name %></li>
-    <li><%= student.course_type %></li>
+    <li><a href="/students/<%= student.slug %>"><%= student.name %></a></li><br>
+    <%= student.course_type %>
   <% end %>
 </ol>
 

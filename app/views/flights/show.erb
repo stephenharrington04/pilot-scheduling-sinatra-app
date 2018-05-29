@@ -6,8 +6,8 @@
 
 <ul>
   <li>Date of Flight: <%= @flight.flight_date %></li>
-  <li>Instructor: <%= @flight.instructor.name %></li>
-  <li>Student: insert flight.student.name here </li>
+  <li>Instructor: <a href="/instructors/<%= @flight.instructor.slug %>"><%= @flight.instructor.name %></a></li>
+  <li>Student: <a href="/students/<%= @flight.student.slug %>"><%= @flight.student.name %></a></li>
   <li>Mission Type: <%= @flight.mission_type %></li>
   <li>Mission Number: <%= @flight.mission_number%></li>
   <li>Duration: <%= @flight.duration %></li><br>

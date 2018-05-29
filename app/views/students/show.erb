@@ -14,7 +14,7 @@
 <h3>Here are <%= @student.name %>'s instructors:</h3>
 <ol>
   <% @student.instructors.each do |instructor| %>
-    <li><%= instructor.name %></li>
+    <li><a href="/instructors/<%= instructor.slug %>"><%= instructor.name %></a></li>
   <% end %>
 </ol>
 
