@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Pilot Scheduling</title>
+  </head>
+  <header>
+    <% if student_logged_in? %>
+      <a href="/students/<%= current_student.slug %>"><%= current_student.name %></a>
+    <% elsif instructor_logged_in? %>
+      <a href="/instructors/<%= current_instructor.slug %>"><%= current_instructor.name %></a>
+    <% else %>
+      <a href="/">Log in here.</a></h2>
+    <% end %>
+  </header>
+  <body>
+    <%= yield %>
+  </body>
+</html>
