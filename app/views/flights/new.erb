@@ -13,8 +13,14 @@
   <input type="text" name="flight[mission_number]" id="mission_number" required><br>
   <label>Duration: </label>
   <input type="text" name="flight[duration]" id="duration" required><br>
+
   <label>Mission Type: </label>
-  <input type="text" name="flight[mission_type]" id="mission_type" required><br>
+  <select name="flight[mission_type]" required>
+    <% msn_types.each do |type| %>
+      <option><%= type %></option>
+    <% end %>
+  </select><br>
+
   <label>Instructor: </label>
   <select name="ip_name" required>
     <% Instructor.all.each do |instructor| %>
@@ -22,6 +28,7 @@
     <% end %>
     <option>None</option>
   </select><br>
+  
   <label>Student: </label>
   <select name="student_name" required>
     <% Student.all.each do |student| %>

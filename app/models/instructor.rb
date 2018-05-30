@@ -23,7 +23,11 @@ class Instructor < ActiveRecord::Base
       case student.course_type
       when "IAC"
         counter += 3
-      when "PIQ" || "ACQ" || "PTX"
+      when "PIQ"
+        counter += 2
+      when "ACQ"
+        counter += 2
+      when "PTX"
         counter += 2
       when "T3"
         counter += 1
