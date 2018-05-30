@@ -9,8 +9,22 @@
     <li><a href="/flights/<%= flight.id %>"><%= flight.callsign %></a></li><br>
       <ul>
         <li>Date of Flight: <%= flight.flight_date %></li>
-        <li>Instructor: <%= flight.instructor.name %></li>
-        <li>Student: <%= flight.student.name %></li>
+        <li>
+          Instructor:
+          <% if flight.instructor %>
+            <%= flight.instructor.name %>
+          <% else %>
+            None
+          <% end %>
+        </li>
+        <li>
+          Student:
+          <% if flight.student %>
+            <%= flight.student.name %>
+          <% else %>
+            None
+          <% end %>
+        </li>
         <li>Mission Type: <%= flight.mission_type %></li>
         <li>Duration: <%= flight.duration %></li><br>
       </ul>

@@ -20,12 +20,14 @@
     <% Instructor.all.each do |instructor| %>
       <option value="<%= instructor.name %>"><%= instructor.name %></option>
     <% end %>
+    <option>None</option>
   </select><br>
   <label>Student: </label>
   <select name="student_name" required>
     <% Student.all.each do |student| %>
       <option value="<%= student.name %>"><%= student.name %></option>
     <% end %>
+    <option>None</option>
   </select><br>
   <input type="submit" value="Create Flight">
 </form>
