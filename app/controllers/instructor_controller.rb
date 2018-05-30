@@ -77,16 +77,20 @@ class InstructorController < ApplicationController
     end
   end
 
-
-#Stopped here 13:15 29 May 18.  Need to keep validating if a student is logged in
   get '/instructors/:slug/edit' do
-    instructor_go_log_in
     @instructor = Instructor.find_by_slug(params[:slug])
-    if current_instructor != @instructor
+    if instructor_logged_in? && current_instructor == @instructor
+      erb :'/instructors/edit'
+    elsif instructor_logged_in? && current_instructor != @instructor
       flash[:message] = "You do not have permissions to edit THAT page."
       redirect "/instructors"
+    elsif student_logged_in?
+      flash[:message] = "Students cannot edit an instructor's profile pages."
+      redirect "/"
+    else
+      flash[:message] = "You must be logged in to view that page."
+      redirect "/"
     end
-    erb :'/instructors/edit'
   end
 
   patch '/instructors/:slug' do
