@@ -11,11 +11,9 @@
   <input type="text" name="student[email]" id="student email" required>
   <label>Course Type: </label>
   <select name="student[course_type]" id="student course" required>
-    <option>IAC</option>
-    <option>PIQ</option>
-    <option>ACQ</option>
-    <option>PTX</option>
-    <option>T3</option>
+    <% course_types.each do |type| %>
+      <option><%= type %></option>
+    <% end %>
   </select>
   <label>Password: </label>
   <input type="password" name="student[password]" id="student password" required>
