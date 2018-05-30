@@ -18,6 +18,8 @@
   <% end %>
 </ol>
 
+<h3>Total flight hours: <%= @student.student_flight_hours %></h3>
+
 <% if instructor_logged_in? || current_student == @student %>
   <form action="/students/<%= @student.slug %>/delete" method="GET">
     <input type="submit" value="Delete Account">
