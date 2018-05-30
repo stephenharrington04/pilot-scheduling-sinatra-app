@@ -46,18 +46,17 @@ class FlightController < ApplicationController
   end
 
   get '/flights/:id/edit' do
-    flight = Flight.find(params[:id])
-    if student_logged_in?
+    @flight = Flight.find(params[:id])
+    if instructor_logged_in? && current_instructor == @flight.instructor
+      erb :'flights/edit'
+    elsif instructor_logged_in? && current_instructor != @flight.instructor
+      flash[:message] = "Sorry, Only #{@flight.instructor.name} May Edit #{@flight.callsign}."
+      redirect "/flights/#{@flight.id}"
+    elsif student_logged_in?
       flash[:message] = "Sorry, Only Instructors May Edit A Flight."
-      redirect "/flights/#{flight.id}"
-    elsif !instructor_logged_in?
-      redirect "/flights/#{flight.id}"
-    elsif current_instructor != flight.instructor
-      flash[:message] = "Sorry, Only #{flight.instructor.name} May Edit #{flight.callsign}."
-      redirect "/flights/#{flight.id}"
+      redirect "/flights/#{@flight.id}"
     else
-      @flight = flight
-      erb :'/flights/edit'
+      go_log_in
     end
   end
 
@@ -71,6 +70,8 @@ class FlightController < ApplicationController
       redirect "/flights/#{flight.id}/edit"
     else
       flight.update(params[:flight])
+      flight.instructor = Instructor.find_by(name: params[:ip_name]) if params[:ip_name] != "None"
+      flight.student = Student.find_by(name: params[:student_name]) if params[:student_name] != "None"
       flight.save
       redirect "/flights/#{flight.id}"
     end
