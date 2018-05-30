@@ -17,8 +17,11 @@
   <label>Mission Type: </label>
 
   <select name="flight[mission_type]">
+    <option selected><%= @flight.mission_type %></option>
     <% msn_types.each do |type| %>
-      <option><%= type %></option>
+      <% if type != @flight.mission_type %>
+        <option><%= type %></option>
+      <% end %>
     <% end %>
   </select><br>
 
