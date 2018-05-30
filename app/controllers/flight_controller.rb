@@ -1,7 +1,7 @@
 class FlightController < ApplicationController
 
   get '/flights' do
-    if instructor_logged_in? || student_logged_in?
+    if ip_or_stud_logged_in?
       @flights = Flight.all
       erb :'/flights/index'
     else
@@ -39,7 +39,7 @@ class FlightController < ApplicationController
   end
 
   get '/flights/:id' do
-    if instructor_logged_in? || student_logged_in?
+    if ip_or_stud_logged_in?
       @flight = Flight.find(params[:id])
       erb :'/flights/show'
     else

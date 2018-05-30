@@ -1,7 +1,7 @@
 class StudentController < ApplicationController
 
   get '/students' do
-    if instructor_logged_in? || student_logged_in?
+    if ip_or_stud_logged_in?
       @students = Student.all
       erb :'/students/index'
     else
@@ -36,7 +36,7 @@ class StudentController < ApplicationController
   end
 
   get '/students/login' do
-    if student_logged_in? || instructor_logged_in?
+    if ip_or_stud_logged_in?
       flash[:message] = "You're already Logged In."
       redirect "/students"
     end
@@ -55,7 +55,7 @@ class StudentController < ApplicationController
   end
 
   get '/students/:slug' do
-    if student_logged_in? || instructor_logged_in?
+    if ip_or_stud_logged_in?
       @student = Student.find_by_slug(params[:slug])
       erb :'/students/show'
     else

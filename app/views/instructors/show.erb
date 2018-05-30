@@ -19,6 +19,9 @@
   <% end %>
 </ol>
 
+<h3>Total flight hours: <%= @instructor.instructor_flight_hours %></h3>
+<h3>Total Days Required: <%= @instructor.instructor_days_req %></h3>
+
 <% if current_instructor == @instructor %>
   <form action="/instructors/<%= @instructor.slug %>/delete" method="GET">
     <input type="submit" value="Delete Account">
