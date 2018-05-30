@@ -23,4 +23,11 @@
   <body>
     <%= yield %>
   </body>
+  <footer>
+    <% if student_logged_in? || instructor_logged_in? %>
+      <form action="/logout" method="GET">
+        <input type="submit" value="Logout">
+      </form>
+    <% end %>
+  </footer>
 </html>
