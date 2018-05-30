@@ -15,7 +15,12 @@
   <label>Duration: </label>
   <input type="text" name="flight[duration]" id="duration" value="<%= @flight.duration %>"><br>
   <label>Mission Type: </label>
-  <input type="text" name="flight[mission_type]" id="mission_type" value="<%= @flight.mission_type %>"><br>
+
+  <select name="flight[mission_type]">
+    <% msn_types.each do |type| %>
+      <option><%= type %></option>
+    <% end %>
+  </select><br>
 
   <label>Instructor: </label>
   <select name="ip_name">

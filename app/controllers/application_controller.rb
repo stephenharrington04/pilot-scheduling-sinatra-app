@@ -43,5 +43,9 @@ class ApplicationController < Sinatra::Base
     def syllabus_types
       ["IAC", "ACQ", "PIQ", "PTX", "T3"]
     end
+
+    def msn_types
+      ["Student Training", "Continuation Training", "Student Checkride", "PP Checkride"]
+    end
   end
 end
