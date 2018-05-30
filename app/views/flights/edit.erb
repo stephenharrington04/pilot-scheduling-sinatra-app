@@ -7,32 +7,51 @@
 <form action="/flights/<%= @flight.id %>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
   <label>Callsign: </label>
-  <input type="text" name="flight[callsign]" id="callsign" ><br>
+  <input type="text" name="flight[callsign]" id="callsign" value="<%= @flight.callsign %>"><br>
   <label>Date of Flight: </label>
-  <input type="date" name="flight[flight_date]" id="flight_date"><br>
+  <input type="date" name="flight[flight_date]" id="flight_date" value="<%= @flight.flight_date %>"><br>
   <label>Mission Number: </label>
-  <input type="text" name="flight[mission_number]" id="mission_number"><br>
+  <input type="text" name="flight[mission_number]" id="mission_number" value="<%= @flight.mission_number %>"><br>
   <label>Duration: </label>
-  <input type="text" name="flight[duration]" id="duration"><br>
+  <input type="text" name="flight[duration]" id="duration" value="<%= @flight.duration %>"><br>
   <label>Mission Type: </label>
-  <input type="text" name="flight[mission_type]" id="mission_type"><br>
+  <input type="text" name="flight[mission_type]" id="mission_type" value="<%= @flight.mission_type %>"><br>
+
   <label>Instructor: </label>
   <select name="ip_name">
-    <option value="<%= @flight.instructor.name %>" selected><%= @flight.instructor.name %></option>
-    <% Instructor.all.each do |instructor| %>
-      <% if instructor != @flight.instructor %>
+    <% if @flight.instructor %>
+      <option value="<%= @flight.instructor.name %>" selected><%= @flight.instructor.name %></option>
+      <% Instructor.all.each do |instructor| %>
+        <% if instructor != @flight.instructor %>
+          <option value="<%= instructor.name %>"><%= instructor.name %></option>
+        <% end %>
+      <% end %>
+      <option value="None">None</option>
+    <% else %>
+      <option value="None" selected>None</option>
+      <% Instructor.all.each do |instructor| %>
         <option value="<%= instructor.name %>"><%= instructor.name %></option>
       <% end %>
     <% end %>
   </select><br>
+
   <label>Student: </label>
   <select name="student_name">
-    <option value="<%= @flight.student.name %>" selected><%= @flight.student.name %></option>
-    <% Student.all.each do |student| %>
-      <% if student != @flight.student %>
+    <% if @flight.student %>
+      <option value="<%= @flight.student.name %>" selected><%= @flight.student.name %></option>
+      <% Student.all.each do |student| %>
+        <% if student != @flight.student %>
+          <option value="<%= student.name %>"><%= student.name %></option>
+        <% end %>
+      <% end %>
+      <option value="None">None</option>
+    <% else %>
+      <option value="None" selected>None</option>
+      <% Student.all.each do |student| %>
         <option value="<%= student.name %>"><%= student.name %></option>
       <% end %>
     <% end %>
   </select><br>
+
   <input type="submit" value="Edit Flight">
 </form>
