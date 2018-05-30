@@ -2,7 +2,7 @@ class InstructorController < ApplicationController
   use Rack::Flash
 
   get '/instructors' do
-    if instructor_logged_in? || student_logged_in?
+    if ip_or_stud_logged_in?
       @instructors = Instructor.all
       erb :'/instructors/index'
     else

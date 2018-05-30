@@ -28,6 +28,10 @@ class ApplicationController < Sinatra::Base
       !!session[:student_id]
     end
 
+    def ip_or_stud_logged_in?
+      instructor_logged_in? || student_logged_in?
+    end
+
     def current_instructor
       Instructor.find(session[:instructor_id])
     end
