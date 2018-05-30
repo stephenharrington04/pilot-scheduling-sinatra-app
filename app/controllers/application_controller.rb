@@ -40,7 +40,7 @@ class ApplicationController < Sinatra::Base
       Student.find(session[:student_id])
     end
 
-    def course_types
+    def syllabus_types
       ["IAC", "ACQ", "PIQ", "PTX", "T3"]
     end
   end

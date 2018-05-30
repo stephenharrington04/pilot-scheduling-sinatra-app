@@ -27,6 +27,8 @@ class Instructor < ActiveRecord::Base
         counter += 2
       when "T3"
         counter += 1
+      when "None"
+        counter += 0
       end
     end
     counter

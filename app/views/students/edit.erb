@@ -11,6 +11,17 @@
   <label>Student Email: </label>
   <input type="text" name="student[email]" id="<%= @student.email %>" value="<%= @student.email %>"><br>
 
+  <label>Course Type: </label>
+  <select name="student[course_type]" id="<%= @student.course_type %>">
+    <option value="<%= @student.course_type %>" selected><%= @student.course_type %></option>
+    <% syllabus_types.each do |type| %>
+      <% if type != @student.course_type %>
+        <option value="<%= type %>"><%= type %></option>
+      <% end %>
+    <% end %>
+    <option value="none">None</option>
+  </select><br>
+
   <% if student_logged_in? %>
     <label>Student's Current Password: </label>
     <input type="password" name="current_password" id="current_password"><br>
@@ -24,6 +35,6 @@
   <label>Student's New Password: </label>
   <input type="password" name="student[password]" id="new_password"><br>
   <label>Confirm Student's New Password: </label>
-  <input type="password" name="password_confirm" id="password_confirm">
+  <input type="password" name="password_confirm" id="password_confirm"><br>
   <input type="submit" value="Edit Profile">
 </form>

@@ -11,9 +11,10 @@
   <input type="text" name="student[email]" id="student email" required>
   <label>Course Type: </label>
   <select name="student[course_type]" id="student course" required>
-    <% course_types.each do |type| %>
+    <% syllabus_types.each do |type| %>
       <option><%= type %></option>
     <% end %>
+    <option>None</option>
   </select>
   <label>Password: </label>
   <input type="password" name="student[password]" id="student password" required>
