@@ -85,8 +85,8 @@ class InstructorController < ApplicationController
       flash[:message] = "You do not have permissions to edit THAT page."
       redirect "/instructors"
     elsif student_logged_in?
-      flash[:message] = "Students cannot edit an instructor's profile pages."
-      redirect "/"
+      flash[:message] = "Students cannot edit an instructor's profile page."
+      redirect "/instructors"
     else
       flash[:message] = "You must be logged in to view that page."
       redirect "/"
@@ -113,13 +113,19 @@ class InstructorController < ApplicationController
   end
 
   get '/instructors/:slug/delete' do
-    instructor_go_log_in
     @instructor = Instructor.find_by_slug(params[:slug])
-    if current_instructor != @instructor
-      flash[:message] = "You do not have permissions to Delete that account."
+    if instructor_logged_in? && current_instructor == @instructor
+      erb :'/instructors/delete'
+    elsif instructor_logged_in? && current_instructor != @instructor
+      flash[:message] = "You do not have permissions to delete THAT profile."
       redirect "/instructors"
+    elsif student_logged_in?
+      flash[:message] = "Students cannot delete an instructor's profile page."
+      redirect "/instructors"
+    else
+      flash[:message] = "You must be logged in to view that page."
+      redirect "/"
     end
-    erb :'/instructors/delete'
   end
 
   delete '/instructors/:slug/delete' do
