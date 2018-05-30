@@ -4,23 +4,29 @@
   <%= flash[:message] %><br>
 <% end %>
 
+<h3>Account Information:</h3>
+<h5>
+  Instructor Name: <%= @instructor.name %><br>
+  Instructor Email: <%= @instructor.email %><br>
+  # of Flights: <%= @instructor.flights.count %><br>
+  Flight Hours: <%= @instructor.instructor_flight_hours %><br>
+  # of Students: <%= @instructor.students.uniq.count %><br>
+  Instructor Days Required: <%= @instructor.instructor_days_req %>
+</h5>
+
 <h3>Here are your flights:</h3>
 <ol>
   <% @instructor.flights.each do |flight| %>
-      <li><a href="/flights/<%= flight.id %>"><%= flight.callsign %></a></li><br>
+      <li><a href="/flights/<%= flight.id %>"><%= flight.callsign %></a></li>
   <% end %>
 </ol>
 
 <h3>Here are your students:</h3>
 <ol>
-  <% @instructor.students.each do |student| %>
-    <li><a href="/students/<%= student.slug %>"><%= student.name %></a></li><br>
-    <%= student.course_type %>
+  <% @instructor.students.uniq.each do |student| %>
+    <li><a href="/students/<%= student.slug %>"><%= student.name %></a> -- <%= student.course_type %></li>
   <% end %>
 </ol>
-
-<h3>Total flight hours: <%= @instructor.instructor_flight_hours %></h3>
-<h3>Total Days Required: <%= @instructor.instructor_days_req %></h3>
 
 <% if current_instructor == @instructor %>
   <form action="/instructors/<%= @instructor.slug %>/delete" method="GET">
