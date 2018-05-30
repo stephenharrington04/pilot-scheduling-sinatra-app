@@ -28,20 +28,6 @@ class ApplicationController < Sinatra::Base
       !!session[:student_id]
     end
 
-    def instructor_go_log_in
-      if !instructor_logged_in?
-        flash[:message] = "You must be logged in as an instructor to view that page."
-        redirect "/"
-      end
-    end
-
-    def student_go_log_in
-      if !student_logged_in?
-        flash[:message] = "You must be logged in to view that page."
-        redirect "/"
-      end
-    end
-
     def current_instructor
       Instructor.find(session[:instructor_id])
     end
