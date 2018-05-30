@@ -80,29 +80,30 @@ class FlightController < ApplicationController
   end
 
   get '/flights/:id/delete' do
-    if student_logged_in?
-      flash[:message] = "Sorry, Only Instructors May Delete A Flight."
-      redirect "/flights/#{flight.id}"
-    elsif !instructor_logged_in?
-      redirect "/flights/#{flight.id}"
-    elsif current_instructor != flight.instructor
-      flash[:message] = "Sorry, Only #{flight.instructor.name} May Delete #{flight.callsign}."
-      redirect "/flights/#{flight.id}"
-    else
-      @flight = Flight.find_by_id(params[:id])
+    @flight = Flight.find_by_id(params[:id])
+    if instructor_logged_in? && current_instructor == @flight.instructor
       erb :'flights/delete'
+    elsif instructor_logged_in? && current_instructor != @flight.instructor
+      flash[:message] = "Sorry, Only #{@flight.instructor.name} May Delete #{@flight.callsign}."
+      redirect "/flights/#{@flight.id}"
+    elsif student_logged_in?
+      flash[:message] = "Sorry, Only Instructors May Delete A Flight."
+      redirect "/flights/#{@flight.id}"
+    else
+      flash[:message] = "You muse be logged in to view this page."
+      redirect "/"
     end
   end
 
   delete '/flights/:id/delete' do
-    @flight = Flight.find_by_id(params[:id])
+    flight = Flight.find_by_id(params[:id])
     if current_instructor.authenticate(params[:instructor_password])
-      @flight.delete
+      flight.delete
       flash[:message] = "Successfully Deleted Flight!"
       redirect "/flights"
     end
     flash[:message] = "Incorrect Password.  Please Try Again."
-    redirect "/flights/#{@flight.id}/delete"
+    redirect "/flights/#{flight.id}/delete"
   end
 
 end
