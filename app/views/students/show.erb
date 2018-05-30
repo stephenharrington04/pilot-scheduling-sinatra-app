@@ -4,21 +4,27 @@
   <%= flash[:message] %><br>
 <% end %>
 
-<h3>Here are <%= @student.name %>'s flights:</h3>
+<h3>Account Information:</h3>
+<h5>
+  Student Name: <%= @student.name %><br>
+  Email: <%= @student.email %><br>
+  Course: <%= @student.course_type %><br>
+  Total Flight Hours: <%= @student.student_flight_hours %>
+</h5>
+
+<h3><%= @student.name %>'s Flights:</h3>
 <ol>
   <% @student.flights.each do |flight| %>
-      <li><a href="/flights/<%= flight.id %>"><%= flight.callsign %></a></li><br>
+    <li><a href="/flights/<%= flight.id %>"><%= flight.callsign %></a></li>
   <% end %>
 </ol>
 
-<h3>Here are <%= @student.name %>'s instructors:</h3>
+<h3><%= @student.name %>'s Instructors:</h3>
 <ol>
-  <% @student.instructors.each do |instructor| %>
+  <% @student.instructors.uniq.each do |instructor| %>
     <li><a href="/instructors/<%= instructor.slug %>"><%= instructor.name %></a></li>
   <% end %>
 </ol>
-
-<h3>Total flight hours: <%= @student.student_flight_hours %></h3>
 
 <% if instructor_logged_in? || current_student == @student %>
   <form action="/students/<%= @student.slug %>/delete" method="GET">
