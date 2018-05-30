@@ -5,8 +5,7 @@ class FlightController < ApplicationController
       @flights = Flight.all
       erb :'/flights/index'
     else
-      flash[:message] = "You muse be logged in to view this page."
-      redirect "/"
+      go_log_in
     end
   end
 
@@ -17,8 +16,7 @@ class FlightController < ApplicationController
       flash[:message] = "Sorry, Only Instructors May Create A New Flight."
       redirect "/flights"
     else
-      flash[:message] = "You must be logged in to view this page."
-      redirect "/"
+      go_log_in
     end
   end
 
@@ -43,8 +41,7 @@ class FlightController < ApplicationController
       @flight = Flight.find(params[:id])
       erb :'/flights/show'
     else
-      flash[:message] = "You muse be logged in to view this page."
-      redirect "/"
+      go_log_in
     end
   end
 
@@ -90,8 +87,7 @@ class FlightController < ApplicationController
       flash[:message] = "Sorry, Only Instructors May Delete A Flight."
       redirect "/flights/#{@flight.id}"
     else
-      flash[:message] = "You muse be logged in to view this page."
-      redirect "/"
+      go_log_in
     end
   end
 
