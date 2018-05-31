@@ -4,13 +4,8 @@
     <meta charset="utf-8">
     <title>Pilot Scheduling</title>
   </head>
-  <header>
-    <h2>Pilot Scheduling Application</h2>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/flights">Flights</a>
-      <a href="/instructors">Instructors</a>
-      <a href="/students">Students</a>
+  <body>
+    <div id="log-in">
       <% if student_logged_in? %>
         <a href="/students/<%= current_student.slug %>"><%= current_student.name %></a>
       <% elsif instructor_logged_in? %>
@@ -18,16 +13,20 @@
       <% else %>
         <a href="/">Log in here.</a></h2>
       <% end %>
-    </nav>
-  </header>
-  <body>
+      <br>
+      <% if student_logged_in? || instructor_logged_in? %>
+        <a href="/logout">Sign Out</a>
+      <% end %>
+    </div>
+    <header>
+      <h2>Pilot Scheduling Application</h2>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/flights">Flights</a>
+        <a href="/instructors">Instructors</a>
+        <a href="/students">Students</a>
+      </nav>
+    </header>
     <%= yield %>
   </body>
-  <footer>
-    <% if student_logged_in? || instructor_logged_in? %>
-      <form action="/logout" method="GET">
-        <input type="submit" value="Logout">
-      </form>
-    <% end %>
-  </footer>
 </html>
