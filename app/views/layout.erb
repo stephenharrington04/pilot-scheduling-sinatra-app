@@ -3,29 +3,36 @@
   <head>
     <meta charset="utf-8">
     <title>Pilot Scheduling</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
   </head>
   <body>
-    <div id="log-in">
+    <div id="always" class="light-gray">
+      <p>Logged In As</p>
       <% if student_logged_in? %>
         <a href="/students/<%= current_student.slug %>"><%= current_student.name %></a>
+        <a href="/logout">Log Out</a>
       <% elsif instructor_logged_in? %>
         <a href="/instructors/<%= current_instructor.slug %>"><%= current_instructor.name %></a>
+        <a href="/logout">Log Out</a>
       <% else %>
-        <a href="/">Log in here.</a></h2>
-      <% end %>
-      <br>
-      <% if student_logged_in? || instructor_logged_in? %>
-        <a href="/logout">Sign Out</a>
+        <a href="/">Log In Here</a>
       <% end %>
     </div>
     <header>
-      <h2>Pilot Scheduling Application</h2>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/flights">Flights</a>
-        <a href="/instructors">Instructors</a>
-        <a href="/students">Students</a>
-      </nav>
+      <div class="wrapper"> <!-- Wrapper -->
+        <div id="logo">
+          <h2>Pilot Scheduling</h2>
+          <h3>Application</h3>
+        </div> <!-- Wrapper -->
+      </div>
+      <div class ="wrapper"> <!-- Wrapper -->
+        <div id="navbar" class="light-blue"> <!-- Navbar -->
+          <nav>
+            <a href="/">Home</a><a href="/flights">Flights</a><a href="/instructors">Instructors</a><a href="/students">Students</a>
+          </nav>
+        </div> <!-- Navbar -->
+      </div> <!-- Wrapper -->
     </header>
     <%= yield %>
   </body>

@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css?family=Cinzel:400,700');
+
+/*// LOGO //*/
+#logo {
+  padding: 84px 0 0;
+}
+
+#logo h1{
+  font-family: 'Cinzel', serif;
+  margin: 0;
+}
+
+#logo h2{
+  font-family: 'Cinzel', serif;
+  margin: 0;
+}
+
+/*// BACKGROUND //*/
+.light-blue {
+  background: rgb(254,255,255); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(254,255,255,1) 0%, rgba(221,241,249,1) 35%, rgba(160,216,239,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(254,255,255,1) 0%,rgba(221,241,249,1) 35%,rgba(160,216,239,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(254,255,255,1) 0%,rgba(221,241,249,1) 35%,rgba(160,216,239,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#a0d8ef',GradientType=0 ); /* IE6-9 */
+}
+
+.light-gray {
+  background: rgb(229, 229, 229); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(229, 229, 229, 1) 0%, rgba(255, 255, 255, 1) 99%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(229, 229, 229, 1)), color-stop(99%, rgba(255, 255, 255, 1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(229, 229, 229, 1) 0%, rgba(255, 255, 255, 1) 99%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient( top, rgba(229, 229, 229, 1) 0%, rgba(255, 255, 255, 1) 99%); /* Opera 11.10+ */
+  background: -ms-linear-gradient( top, rgba(229, 229, 229, 1) 0%, rgba(255, 255, 255, 1) 99%); /* IE10+ */
+  background: linear-gradient( to bottom, rgba(229, 229, 229, 1) 0%, rgba(255, 255, 255, 1) 99%); /* W3C */
+}
+
+/*// Navbar //*/
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+
+#navbar nav {
+  border-left: 1px solid black;
+}
+
+#navbar nav a {
+  display: inline-block;
+  width: 24%;
+  margin: 0;
+  padding: 22px 0;
+  color: black;
+  text-transform: uppercase;
+  text-align: center;
+  border-right: 1px solid black;
+  text-decoration: none;
+  font: 1em "Trebuchet MS", Arial, sans-serif;
+}
+
+#navbar nav a:hover {
+  color: blue;
+}
+
+/*// Header //*/
+header {
+  margin: 0 0 30px;
+}
+
+/*// Layout //*/
+.wrapper {
+  width: 960px;
+  margin: 0 auto;
+}
+
+
+/*/// Sidebar ///*/
+#always {
+  position: fixed;
+  top: 100px;
+  right: 40px;
+  z-index: 1;
+  border: 1px solid black;
+  text-align: center;
+}
+
+#always p {
+  border-bottom: 1px solid black;
+}
+
+#always a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  padding: 0 10px 10px;
+}
+
+#always a:hover {
+  color: blue;
+}
