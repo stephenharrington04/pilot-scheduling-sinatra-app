@@ -9,3 +9,9 @@
     <li><a href="/students/<%= student.slug %>"><%= student.name %></a> -- <%= student.course_type %></li>
   <% end %>
 </ol>
+
+<% if instructor_logged_in? %>
+  <form action="/students/new" method="GET">
+    <input type="submit" value="Create New Student">
+  </form>
+<% end %>

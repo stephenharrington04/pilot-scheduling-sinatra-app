@@ -31,6 +31,8 @@
   </ol>
 <% end %>
 <br>
-<form action="/flights/new" method="GET">
-  <input type="submit" value="Create New Flight">
-</form>
+<% if instructor_logged_in? %>
+  <form action="/flights/new" method="GET">
+    <input type="submit" value="Create New Flight">
+  </form>
+<% end %>
