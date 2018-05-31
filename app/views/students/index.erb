@@ -6,6 +6,6 @@
 
 <ol>
   <% @students.each do |student| %>
-    <li> <a href="/students/<%= student.slug %>"><%= student.name %></a></li>
+    <li><a href="/students/<%= student.slug %>"><%= student.name %></a> -- <%= student.course_type %></li>
   <% end %>
 </ol>

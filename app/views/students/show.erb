@@ -28,10 +28,10 @@
 </ol>
 
 <% if instructor_logged_in? || current_student == @student %>
-  <form action="/students/<%= @student.slug %>/delete" method="GET">
-    <input type="submit" value="Delete Account">
-  </form>
   <form action="/students/<%= @student.slug %>/edit" method="GET">
     <input type="submit" value="Edit Account">
+  </form>
+  <form action="/students/<%= @student.slug %>/delete" method="GET">
+    <input type="submit" value="Delete Account">
   </form>
 <% end %>
