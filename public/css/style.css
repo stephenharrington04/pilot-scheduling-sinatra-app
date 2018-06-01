@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css?family=Cinzel:400,700');
 
 /*// LOGO //*/
@@ -79,20 +80,20 @@ header {
 }
 
 .wrapper {
-  width: 960px;
+  width: 1080px;
   margin: 0 auto;
 }
 
 .col-1 {
   float: left;
   width: 48%;
-  background: #ccc;
-  margin-left: 2%;
+  margin-left: 4%;
+  padding-left: 5%;
 }
 
 .col-2 {
-  background: #ccc;
   margin-left: 0;
+  padding-left: 5%;
 }
 
 .first {
@@ -100,7 +101,7 @@ header {
 }
 
 /*/// Sidebar ///*/
-#always {
+#sidebar {
   position: fixed;
   top: 100px;
   right: 40px;
@@ -109,17 +110,27 @@ header {
   text-align: center;
 }
 
-#always p {
+#sidebar p {
   border-bottom: 1px solid black;
 }
 
-#always a {
+#sidebar a {
   display: block;
   color: black;
   text-decoration: none;
   padding: 0 10px 10px;
 }
 
-#always a:hover {
+#sidebar a:hover {
   color: blue;
+}
+
+/*// STYLING //*/
+.shadow {
+  box-shadow: 0 3px 10px #333;
+}
+
+#indent {
+  padding-left: 5%;
+  padding-bottom: 2em;
 }

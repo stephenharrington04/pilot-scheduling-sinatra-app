@@ -7,7 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
   </head>
   <body>
-    <div id="always" class="light-gray">
+    <div id="sidebar" class="light-gray">
       <p>Logged In As</p>
       <% if student_logged_in? %>
         <a href="/students/<%= current_student.slug %>"><%= current_student.name %></a>
@@ -37,6 +37,9 @@
         </div> <!-- Navbar -->
       </div> <!-- Wrapper -->
     </header>
+    <% if flash.has?(:message) %>
+      <%= flash[:message] %><br>
+    <% end %>
     <%= yield %>
   </body>
 </html>

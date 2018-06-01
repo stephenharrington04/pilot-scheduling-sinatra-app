@@ -1,38 +1,43 @@
-<h1>Welcome <%= @instructor.name %></h1>
 
-<% if flash.has?(:message) %>
-  <%= flash[:message] %><br>
-<% end %>
+<div class="wrapper">
+  <h1><%= @instructor.name %>'s Profile Page</h1>
 
-<h3>Account Information:</h3>
-<h5>
-  Instructor Name: <%= @instructor.name %><br>
-  Instructor Email: <%= @instructor.email %><br>
-  # of Flights: <%= @instructor.flights.count %><br>
-  Flight Hours: <%= @instructor.instructor_flight_hours %><br>
-  # of Students: <%= @instructor.students.uniq.count %><br>
-  Instructor Days Required: <%= @instructor.instructor_days_req %>
-</h5>
+  <div class="col-2 shadow">
+    <h3>Account Information:</h3>
+    <h5 id="indent">
+      Instructor Name: <%= @instructor.name %><br>
+      Instructor Email: <%= @instructor.email %><br>
+      # of Flights: <%= @instructor.flights.count %><br>
+      Flight Hours: <%= @instructor.instructor_flight_hours %><br>
+      # of Students: <%= @instructor.students.uniq.count %><br>
+      Instructor Days Required: <%= @instructor.instructor_days_req %>
+    </h5>
+  </div>
 
-<h3>Here are your flights:</h3>
-<ol>
-  <% @instructor.flights.each do |flight| %>
-      <li><a href="/flights/<%= flight.id %>"><%= flight.callsign %></a></li>
+  <div class="col-1 first shadow">
+    <h3>Here are your flights:</h3>
+    <ol>
+      <% @instructor.flights.each do |flight| %>
+          <li><a href="/flights/<%= flight.id %>"><%= flight.callsign %></a></li>
+      <% end %>
+    </ol>
+  </div>
+
+  <div class="col-1 shadow">
+    <h3>Here are your students:</h3>
+    <ol>
+      <% @instructor.students.uniq.each do |student| %>
+        <li><a href="/students/<%= student.slug %>"><%= student.name %></a> -- <%= student.course_type %></li>
+      <% end %>
+    </ol>
+  </div>
+
+  <% if current_instructor == @instructor %>
+    <form action="/instructors/<%= @instructor.slug %>/edit" method="GET">
+      <input type="submit" value="Edit Account">
+    </form>
+    <form action="/instructors/<%= @instructor.slug %>/delete" method="GET">
+      <input type="submit" value="Delete Account">
+    </form>
   <% end %>
-</ol>
-
-<h3>Here are your students:</h3>
-<ol>
-  <% @instructor.students.uniq.each do |student| %>
-    <li><a href="/students/<%= student.slug %>"><%= student.name %></a> -- <%= student.course_type %></li>
-  <% end %>
-</ol>
-
-<% if current_instructor == @instructor %>
-  <form action="/instructors/<%= @instructor.slug %>/edit" method="GET">
-    <input type="submit" value="Edit Account">
-  </form>
-  <form action="/instructors/<%= @instructor.slug %>/delete" method="GET">
-    <input type="submit" value="Delete Account">
-  </form>
-<% end %>
+</div>

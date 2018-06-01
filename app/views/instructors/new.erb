@@ -1,9 +1,6 @@
 <h1>Sign Up Today!</h1>
 <h3>Instructors Only</h3>
 
-<% if flash.has?(:message) %>
-  <%= flash[:message] %><br>
-<% end %>
 
 <form action="/instructors" method="POST">
   <label>Name: </label>
