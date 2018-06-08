@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="/css/site-style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
   </head>
+
   <body class="clouds">
-    <div id="sidebar">
+
+    <div id="sidebar" class="light-gray shadow">
       <% if student_logged_in? %>
         <p>Logged In As</p>
         <a href="/students/<%= current_student.slug %>"><%= current_student.name %></a>
@@ -18,7 +20,6 @@
         <a href="/instructors/<%= current_instructor.slug %>"><%= current_instructor.name %></a>
         <a href="/logout">Log Out</a>
       <% else %>
-        <a href="/">Log In Here</a>
       <% end %>
     </div>
 
