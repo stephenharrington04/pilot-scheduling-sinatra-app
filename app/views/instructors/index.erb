@@ -1,6 +1,6 @@
 
 
-<div class="wrapper">
+<section class="col-2">
   <h1>Welcome to the Instructors Directory</h1>
   <% if flash.has?(:message) %>
     <%= flash[:message] %><br>
@@ -10,4 +10,4 @@
       <li><a href="/instructors/<%= instructor.slug %>"><%= instructor.name %></a></li>
     <% end %>
   </ol>
-</div>
+</section>

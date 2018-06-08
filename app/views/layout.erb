@@ -3,43 +3,47 @@
   <head>
     <meta charset="utf-8">
     <title>Pilot Scheduling</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="/css/site-style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
   </head>
-  <body>
-    <div id="sidebar" class="light-gray">
-      <p>Logged In As</p>
+  <body class="clouds">
+    <div id="sidebar">
       <% if student_logged_in? %>
+        <p>Logged In As</p>
         <a href="/students/<%= current_student.slug %>"><%= current_student.name %></a>
         <a href="/logout">Log Out</a>
       <% elsif instructor_logged_in? %>
+        <p>Logged In As</p>
         <a href="/instructors/<%= current_instructor.slug %>"><%= current_instructor.name %></a>
         <a href="/logout">Log Out</a>
       <% else %>
         <a href="/">Log In Here</a>
       <% end %>
     </div>
-    <header>
-      <div class="wrapper"> <!-- Wrapper -->
-        <div id="logo">
-          <h2>Pilot Scheduling</h2>
-          <h3>Application</h3>
+
+      <header>
+        <div class ="wrapper"> <!-- Wrapper -->
+          <div id="logo"> <!-- LOGO -->
+            <h2>Pilot Scheduling</h2>
+            <h3>Application</h3>
+          </div> <!-- LOGO -->
         </div> <!-- Wrapper -->
-      </div>
-      <div class ="wrapper"> <!-- Wrapper -->
-        <div id="navbar" class="light-blue"> <!-- Navbar -->
-          <nav>
-            <a href="/">Home</a>
-            <a href="/flights">Flights</a>
-            <a href="/instructors">Instructors</a>
-            <a href="/students">Students</a>
-          </nav>
-        </div> <!-- Navbar -->
+
+        <div class="wrapper"> <!-- Wrapper -->
+          <div id="navbar" class="light-gray"> <!-- Navbar -->
+            <nav>
+              <a href="/">Home</a><a href="/flights">Flights</a><a href="/instructors">Instructors</a><a href="/students">Students</a>
+            </nav>
+          </div> <!-- Navbar -->
+        </div> <!-- Wrapper -->
+      </header>
+
+      <div class ="wrapper clearfix"> <!-- Wrapper -->
+        <% if flash.has?(:message) %>
+          <%= flash[:message] %><br>
+        <% end %>
+        <%= yield %>
       </div> <!-- Wrapper -->
-    </header>
-    <% if flash.has?(:message) %>
-      <%= flash[:message] %><br>
-    <% end %>
-    <%= yield %>
   </body>
 </html>
