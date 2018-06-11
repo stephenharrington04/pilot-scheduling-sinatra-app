@@ -1,9 +1,5 @@
 <h1>Edit <%= @student.name %>'s Profile Here</h1>
 
-<% if flash.has?(:message) %>
-  <%= flash[:message] %><br>
-<% end %>
-
 <form action="/students/<%= @student.slug %>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
   <label>Student Name: </label>

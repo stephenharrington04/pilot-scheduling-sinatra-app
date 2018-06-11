@@ -1,9 +1,5 @@
 <h2><%= @flight.callsign %></h2>
 
-<% if flash.has?(:message) %>
-  <%= flash[:message] %><br>
-<% end %>
-
 <ul>
   <li>Date of Flight: <%= @flight.flight_date %></li>
   <li>Instructor:

@@ -1,8 +1,6 @@
 <h3>Confirm You Want to Delete <%= @flight.callsign %>?</h3>
 
-<% if flash.has?(:message) %>
-  <%= flash[:message] %><br>
-<% end %>
+
 
 <form action="/flights/<%= @flight.id %>/delete" method="POST">
   <input type="hidden" name="_method" value="DELETE">

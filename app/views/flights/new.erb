@@ -1,8 +1,5 @@
 <h1>Create A Flight!</h1>
 
-<% if flash.has?(:message) %>
-  <%= flash[:message] %><br>
-<% end %>
 
 <form action="/flights" method="POST">
   <label>Callsign: </label>
@@ -28,7 +25,7 @@
     <% end %>
     <option>None</option>
   </select><br>
-  
+
   <label>Student: </label>
   <select name="student_name" required>
     <% Student.all.each do |student| %>

@@ -1,8 +1,6 @@
 <h1>Edit <%= @flight.callsign %></h1>
 
-<% if flash.has?(:message) %>
-  <%= flash[:message] %><br>
-<% end %>
+
 
 <form action="/flights/<%= @flight.id %>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
