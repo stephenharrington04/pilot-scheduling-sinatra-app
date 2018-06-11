@@ -1,7 +1,5 @@
 <h1>Flights</h1>
 
-
-
 <% @flights.each do |flight| %>
   <ol>
     <li><a href="/flights/<%= flight.id %>"><%= flight.callsign %></a></li><br>

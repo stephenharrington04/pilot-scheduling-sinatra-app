@@ -1,7 +1,5 @@
 <h1>Edit <%= @flight.callsign %></h1>
 
-
-
 <form action="/flights/<%= @flight.id %>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
   <label>Callsign: </label>
