@@ -5,8 +5,7 @@ class StudentController < ApplicationController
       @students = Student.all
       erb :'/students/index'
     else
-      flash[:message] = "You muse be logged in to view this page."
-      redirect "/"
+      go_log_in
     end
   end
 
@@ -59,8 +58,7 @@ class StudentController < ApplicationController
       @student = Student.find_by_slug(params[:slug])
       erb :'/students/show'
     else
-      flash[:message] = "You muse be logged in to view this page."
-      redirect "/"
+      go_log_in
     end
   end
 
@@ -72,8 +70,7 @@ class StudentController < ApplicationController
       flash[:message] = "You do not have permissions to edit THAT page."
       redirect "/students"
     else
-      flash[:message] = "You must be logged in to view that page."
-      redirect "/"
+      go_log_in
     end
   end
 
@@ -109,8 +106,7 @@ class StudentController < ApplicationController
       flash[:message] = "You do not have permissions to delete THAT page."
       redirect "/students"
     else
-      flash[:message] = "You must be logged in to view that page."
-      redirect "/"
+      go_log_in
     end
   end
 

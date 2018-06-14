@@ -6,8 +6,7 @@ class InstructorController < ApplicationController
       @instructors = Instructor.all
       erb :'/instructors/index'
     else
-      flash[:message] = "You must be logged in to view that page."
-      redirect "/"
+      go_log_in
     end
   end
 
@@ -72,8 +71,7 @@ class InstructorController < ApplicationController
       flash[:message] = "Students cannot view individual instructor's profile pages."
       redirect "/"
     else
-      flash[:message] = "You must be logged in to view that page."
-      redirect "/"
+      go_log_in
     end
   end
 
@@ -88,8 +86,7 @@ class InstructorController < ApplicationController
       flash[:message] = "Students cannot edit an instructor's profile page."
       redirect "/instructors"
     else
-      flash[:message] = "You must be logged in to view that page."
-      redirect "/"
+      go_log_in
     end
   end
 
@@ -123,8 +120,7 @@ class InstructorController < ApplicationController
       flash[:message] = "Students cannot delete an instructor's profile page."
       redirect "/instructors"
     else
-      flash[:message] = "You must be logged in to view that page."
-      redirect "/"
+      go_log_in
     end
   end
 
