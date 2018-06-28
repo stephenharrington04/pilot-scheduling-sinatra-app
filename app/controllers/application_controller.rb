@@ -38,11 +38,11 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_instructor
-      Instructor.find(session[:instructor_id])
+      @current_ip ||= Instructor.find(session[:instructor_id]) if session[:instructor_id]
     end
 
     def current_student
-      Student.find(session[:student_id])
+      @current_stud ||= Student.find(session[:student_id]) if session[:student_id]
     end
 
     def syllabus_types
